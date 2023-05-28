@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import axios from "axios";
+import { LoginState } from "../store/loginState";
+import { useSetRecoilState } from "recoil";
+import { useNavigate } from "react-router";
 
-export default function GetUserInfo() {
+export default function GetUserInfo(props) {
+
+  const setLoginState = useSetRecoilState(LoginState);
+  const navigate = useNavigate();
   
   const accessToken = window.localStorage.getItem('accessToken')
   const refrehsToken = window.localStorage.getItem('refreshToken')
@@ -16,16 +22,18 @@ export default function GetUserInfo() {
 
     if (res) {
       const { data } = res
-    
+
+      setLoginState(true);
       window.localStorage.setItem('userinfo', JSON.stringify(data))
-      window.location.replace('/')
+      navigate("/");
     }
   }
 
   useEffect(() => {
 
-    getUserInfo()
+    getUserInfo()    
+
   
-  })
+  }, [])
   return <></>;
 }
