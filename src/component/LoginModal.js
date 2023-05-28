@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useRecoilState } from 'recoil';
+import { LoginState } from '../store/loginState';
 
 
-function LoginModal() {
+function LoginModal(props) {
   const [show, setShow] = useState(false);
+
+  const [loginState, setLoginState] = useRecoilState(LoginState);
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false); 
@@ -16,12 +20,23 @@ function LoginModal() {
     window.location = 'http://localhost:8080/oauth2/authorization/kakao'
   }
   
-
+  const logout = () => {
+    window.localStorage.clear()
+    setLoginState(false)
+    // TODO: alert("logout.")
+  }
+  
   return (
     <>
-      <Button className="float-end" variant="primary" onClick={handleShow}>
-        Login
-      </Button>
+      {loginState ? (
+        <Button onClick={logout} className='float-end' variant='secondary'>
+          Logout
+        </Button>
+      ) : (
+        <Button className="float-end" variant="primary" onClick={handleShow}>
+          Login
+        </Button>
+      )}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
