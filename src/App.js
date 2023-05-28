@@ -1,6 +1,6 @@
-import Header from "./layout/Header";
+import Home from "./layout/Home";
 import { Route, Routes } from 'react-router-dom';
-import Login from "./api/Login";
+import GetTokens from "./api/GetTokens";
 import GetUserInfo from "./api/GetUserInfo";
 
 function App() {
@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Header />} />
-        <Route path="/token" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/tokens" element={<GetTokens />} />
         <Route path="/userinfo" element={<GetUserInfo />} />
       </Routes>
     </div>
