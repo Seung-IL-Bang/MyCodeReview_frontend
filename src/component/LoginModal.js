@@ -3,9 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useRecoilState } from 'recoil';
 import { LoginState } from '../store/loginState';
+import { useNavigate } from 'react-router';
 
 
 function LoginModal(props) {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
   const [loginState, setLoginState] = useRecoilState(LoginState);
@@ -25,9 +27,14 @@ function LoginModal(props) {
     setLoginState(false)
     // TODO: alert("logout.")
   }
+
+  const write = () => {
+    navigate("/write")
+  }
   
   return (
     <>
+      {loginState && <Button onClick={write} variant="outline-primary">새 글 작성</Button>}
       {loginState ? (
         <Button onClick={logout} className='float-end' variant='secondary'>
           Logout
@@ -37,18 +44,19 @@ function LoginModal(props) {
           Login
         </Button>
       )}
+      
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Social Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Button variant="primary" onClick={googleLogin}>
+          <Button variant="primary" onClick={googleLogin} >
             Google Login
           </Button>
         </Modal.Body>
         <Modal.Body>
-          <Button variant="primary" onClick={kakaoLogin}>
+          <Button variant="primary" onClick={kakaoLogin} >
             Kakao Login
           </Button>
         </Modal.Body>
