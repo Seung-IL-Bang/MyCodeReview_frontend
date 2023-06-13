@@ -1,30 +1,33 @@
-import { useState } from "react";
+import {useRef, forwardRef, useImperativeHandle, useState } from 'react';
 import MarkdownInput from "./MarkdownInput";
 import MarkdownSubmit from "./MarkdownSubmit";
 import TitleForm from "./TitleForm";
 
 export default function Write(props) {
 
-  const [title, setTitle] = useState('');
+  const titleFormRef = useRef();
+
   const [content, setContent] = useState('');
 
   const handleSubmitBoard = () => {
-    
-  };
+    // call in MarkdownSubmit
 
-  const handleGetTitle = (title) => {
-    setTitle(title);
-  };
+    // title get in TitleForm
+    const title = titleFormRef?.current?.getTitle();
+  
+    // content get in MarkdownInput
 
-  const handleGetContent = (markdown) => {
-    setContent(markdown)
+    // axios post method
+
+    // navigate root page
+
   };
 
   return (
     <div>
-      <TitleForm onGetTitle={handleGetTitle}/>
-      <MarkdownInput onGetContent={handleGetContent}/>
-      <MarkdownSubmit />
+      <TitleForm ref={titleFormRef} />
+      <MarkdownInput />
+      <MarkdownSubmit onSaveBoard={handleSubmitBoard}/>
     </div>
   );
 }
