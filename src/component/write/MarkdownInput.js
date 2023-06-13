@@ -3,17 +3,29 @@ import Prism from "prismjs";
 import "prismjs/themes/prism.css";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js";
 import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
-import { useRef } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 
-export default function MarkdownInput(props) {
+const MarkdownInput = forwardRef(function MarkdownInput(props, ref) {
   const editorRef = useRef();
+  const [content, setContent] = useState('');
 
-  const GetContent = () => {
-    if (editorRef.current) {
-      const markdown = editorRef.current.getInstance().getMarkdown();
-      props.onGetContent(markdown);
+  useImperativeHandle(ref, () => {
+    return {
+      getContent() {
+
+        handleContentChange()
+        console.log('getContent: ' + content)
+        return content
+      }
     }
-  };
+  }, [content])
+
+
+  const handleContentChange = (event) => {
+    const markdown = editorRef.current.getInstance().getMarkdown();
+    setContent(markdown)
+    return content
+  }
 
   const toolbarItems = [
     ["heading", "bold", "italic", "strike"],
@@ -37,7 +49,11 @@ export default function MarkdownInput(props) {
         useCommandShortcut={true}
         hideModeSwitch={true}
         plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+        onChange={handleContentChange}
       />
     </>
   );
-}
+});
+
+
+export default MarkdownInput;
