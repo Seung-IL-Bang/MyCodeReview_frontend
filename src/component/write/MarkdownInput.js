@@ -30,7 +30,7 @@ export default function MarkdownInput(props) {
         ref={editorRef}
         initialValue={" "}
         initialEditType="markdown"
-        previewStyle={window.innerWidth > 1000 ? "vertical" : "tab"}
+        previewStyle="vertical"
         height="600px"
         usageStatistics={false}
         toolbarItems={toolbarItems}
