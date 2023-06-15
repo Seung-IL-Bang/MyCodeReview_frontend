@@ -13,25 +13,6 @@ export default function Home(props) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() =>{
-    // 로그인 상태 false 인 경우 Content 비활성화
-    // 로그인 상태 true 인 경우 Board List 조회
-    if(loginState) {
-      getBoardList()
-      .then(res => {
-        setIsLoading(false)
-        setData(res.dtoList)
-      }).catch(e =>{
-        alert('Exception:GET Board List')
-      }) 
-      
-    }
-
-    // Board List 조회 성공 시 데이터 props 로 전달
-    // Board List 조회 실패 시 Content 비활성화
-
-  }, [data])
-
   const getBoardList = async () => {
 
     const accessToken = localStorage.getItem('accessToken')
@@ -47,7 +28,22 @@ export default function Home(props) {
     return response.data
   }
 
-
+  useEffect(() =>{
+    // 로그인 상태 false 인 경우 Content 비활성화
+    // 로그인 상태 true 인 경우 Board List 조회
+    // Board List 조회 성공 시 데이터 props 로 전달
+    // Board List 조회 실패 시 Content 비활성화
+    if(loginState) {
+      getBoardList()
+      .then(res => {
+        setIsLoading(false)
+        setData(res.dtoList)
+      }).catch(e =>{
+        alert('Exception:GET Board List')
+      }) 
+      
+    }
+  }, []) // 의존성 배열에 data 넣거나 의존성 배열 미작성시 무한 요청
 
   return (
     <div>
