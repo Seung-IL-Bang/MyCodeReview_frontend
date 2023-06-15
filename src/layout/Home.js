@@ -20,7 +20,7 @@ export default function Home(props) {
       getBoardList()
       .then(res => {
         setIsLoading(false)
-        setData(res)
+        setData(res.dtoList)
       }).catch(e =>{
         alert('Exception:GET Board List')
       }) 
@@ -38,7 +38,7 @@ export default function Home(props) {
     
     const response = await axios({
       method: 'get',
-      url: 'http://localhost:8080/auth/board/list',
+      url: 'http://localhost:8080/auth/board/v1/list',
       headers : {
         'Authorization' : `Bearer ${accessToken}`
       }
