@@ -1,0 +1,8 @@
+.board_card {
+  position: relative;
+  transition: transform 0.3s ease; /* hover 효과를 위한 transition 설정 */
+}
+
+.board_card:hover {
+  transform: translateY(-5px); /* 위로 살짝 띄워지는 효과 */
+}
