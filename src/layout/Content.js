@@ -1,11 +1,11 @@
-import Board from "../component/Board";
+import Board from "../component/board/Board";
 import { Container, Row, Col } from "react-bootstrap";
 
 export default function Content(props) {
-
+  
 
   const boardList = props.list.map((board) => (
-    <Col key={`board${board.id}`} md={3}>
+    <Col key={`board${board.id}`} md={3} >
       <Board
         id={board.id}
         email={board.email}
