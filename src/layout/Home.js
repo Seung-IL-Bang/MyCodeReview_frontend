@@ -5,6 +5,7 @@ import axios from 'axios';
 import Content from "./Content";
 import Footer from "./Footer";
 import Header from "./Header";
+import { Spinner } from "react-bootstrap";
 
 export default function Home(props) {
   
@@ -48,7 +49,7 @@ export default function Home(props) {
   return (
     <div>
       <Header  />
-      {(isLoading || !loginState) && <div>Loading Data...</div>}
+      {(isLoading || !loginState) && <Spinner animation="border" />}
       {!isLoading && (loginState && data) && <Content list={data}/>} 
       <Footer />
     </div>
