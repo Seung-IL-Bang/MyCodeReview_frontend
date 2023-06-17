@@ -1,7 +1,7 @@
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import { Viewer } from '@toast-ui/react-editor';
-import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import MetaData from './MetaData';
 
 
 export default function MarkdownViewer(props) {  
@@ -11,7 +11,8 @@ export default function MarkdownViewer(props) {
       <Container>
         <Row className="justify-content-center">
           <Col lg={8}>
-            <Viewer initialValue={props.content} />
+            <MetaData data={props.data} id={props.id}/>
+            <Viewer initialValue={props.data.content} />
           </Col>
         </Row>
       </Container>

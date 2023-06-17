@@ -1,0 +1,23 @@
+/* MarkdownViewer.css */
+
+.title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.action_links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link {
+  font-family: 'Trendy Font', sans-serif;
+  color: gray;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.separator {
+  color: gray;
+  margin: 0 8px;
+}
