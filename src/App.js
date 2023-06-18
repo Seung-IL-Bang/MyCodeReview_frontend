@@ -4,6 +4,7 @@ import GetTokens from "./api/GetTokens";
 import GetUserInfo from "./api/GetUserInfo";
 import Write from "./component/write/Write";
 import Review from "./component/review/Review";
+import Modify from "./component/modify/Modify";
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/write" element={<Write />} />
+        <Route path="/modify/:id" element={<Modify />} />
         <Route path="/review/:id" element={<Review />}/> 
         <Route path="/tokens" element={<GetTokens />} />
         <Route path="/userinfo" element={<GetUserInfo />} />
