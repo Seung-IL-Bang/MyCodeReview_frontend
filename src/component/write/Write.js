@@ -65,7 +65,7 @@ export default function Write(props) {
   return (
     <div>
       <TitleForm ref={childTitleRef} />
-      <MarkdownInput ref={childMarkdownRef} initialValue={" "} />
+      <MarkdownInput ref={childMarkdownRef} initialValue={""} />
       <MarkdownSubmit onSaveBoard={handleSubmitBoard}/>
     </div>
   );
