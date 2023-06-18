@@ -12,9 +12,6 @@ const MarkdownInput = forwardRef(function MarkdownInput(props, ref) {
   useImperativeHandle(ref, () => {
     return {
       getContent() {
-
-        handleContentChange()
-        console.log('getContent: ' + content)
         return content
       }
     }
@@ -24,7 +21,6 @@ const MarkdownInput = forwardRef(function MarkdownInput(props, ref) {
   const handleContentChange = (event) => {
     const markdown = editorRef.current.getInstance().getMarkdown();
     setContent(markdown)
-    return content
   }
 
   const toolbarItems = [
@@ -40,7 +36,7 @@ const MarkdownInput = forwardRef(function MarkdownInput(props, ref) {
     <>
       <Editor
         ref={editorRef}
-        initialValue={" "}
+        initialValue={props.initialValue}
         initialEditType="markdown"
         previewStyle="vertical"
         height="600px"

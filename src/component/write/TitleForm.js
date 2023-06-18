@@ -3,12 +3,11 @@ import Form from 'react-bootstrap/Form';
 
 const TitleForm = forwardRef(function TitleForm(props, ref) {
 
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState(props.initialValue || '');
 
   useImperativeHandle(ref, () => {
     return {
       getTitle() {
-        console.log('getTitle : ' + title)
         return title
       }
     }
@@ -28,6 +27,7 @@ const TitleForm = forwardRef(function TitleForm(props, ref) {
         id="inputPassword5"
         aria-describedby="passwordHelpBlock"
         placeholder='제목을 입력해주세요.'
+        value={title}
         onChange={handleTitleChange}
       />
       <Form.Text id="passwordHelpBlock" muted>
