@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { Form } from "react-bootstrap";
 import styled from 'styled-components'
 
-export default function Tag() {
+const Tag = forwardRef(function Tag(props, ref) {
   const [tagItem, setTagItem] = useState('');
-  const [tagList, setTagList] = useState([]);
+  const [tagList, setTagList] = useState(props.initialValue);
+
+  useImperativeHandle(ref, () => {
+    return {
+      getTagList() {
+        return tagList;
+      }
+    }
+  }, [tagList])
 
   const onKeyPress = e => {
     if (e.target.value.length !== 0 && e.key === 'Enter') {
@@ -47,7 +55,9 @@ export default function Tag() {
       </TagBox>
     </WholeBox>
   );
-}
+});
+
+export default Tag;
 
 const WholeBox = styled.div`
   padding: 1rem;
