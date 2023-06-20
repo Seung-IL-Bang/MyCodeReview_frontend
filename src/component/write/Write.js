@@ -10,6 +10,7 @@ export default function Write(props) {
 
   const childTitleRef = useRef();
   const childMarkdownRef = useRef();
+  const childTagRef = useRef();
 
   const navigate = useNavigate();
 
@@ -22,15 +23,17 @@ export default function Write(props) {
     // content get in MarkdownInput
     const content = childMarkdownRef?.current?.getContent();
 
+    const tagList = childTagRef?.current?.getTagList();
+
     // axios post method
-    const res = uploadToServer(title, content)
+    const res = uploadToServer(title, content, tagList)
     
     // navigate root page
     navigate('/')
   };
 
   // Authorization, username, email 
-  async function uploadToServer(title, content) {
+  async function uploadToServer(title, content, tagList) {
 
     const accessToken = localStorage.getItem('accessToken')
     const refreshToken = localStorage.getItem('refreshToken')
@@ -43,6 +46,7 @@ export default function Write(props) {
     const formObj = {
       'title' : title,
       'content': content,
+      'tagList': tagList,
       'writer' : writer,
       'email' : email
     }
@@ -66,7 +70,7 @@ export default function Write(props) {
   return (
     <div>
       <TitleForm ref={childTitleRef} />
-      <Tag />
+      <Tag ref={childTagRef} initialValue={[]}/>
       <MarkdownInput ref={childMarkdownRef} initialValue={""} />
       <MarkdownSubmit onSaveBoard={handleSubmitBoard}/>
     </div>

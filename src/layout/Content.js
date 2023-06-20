@@ -10,6 +10,7 @@ export default function Content(props) {
         id={board.id}
         email={board.email}
         content={board.content}
+        tagList={board.tagList}
         writer={board.writer}
         title={board.title}
       />
