@@ -21,3 +21,22 @@
   color: gray;
   margin: 0 8px;
 }
+
+.tag_list {
+  display: flex;
+  justify-content: flex-start; /* 좌측으로 밀착 */
+  font-family: 'Trendy Font', sans-serif;
+}
+
+.tag_list > * {
+  margin-right: 10px; /* 태그 간 간격 제거 */
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.tag_list > *:hover {
+  background-color: #0056b3;
+}

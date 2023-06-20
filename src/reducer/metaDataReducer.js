@@ -1,6 +1,7 @@
 const initialState = {
     title: '',
-    content: ''
+    content: '',
+    tagList: []
   };
   
 const metaDataReducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const metaDataReducer = (state = initialState, action) => {
         return {
             ...state,
             content: action.payload
+        };
+      case 'SET_TAG_LIST':
+        return {
+          ...state,
+          tagList: action.payload
         }
       default:
         return state;
@@ -34,6 +40,13 @@ export const setContent = (content) => {
         payload: content
       };
     };
+
+export const setTagList = (tagList) => {
+  return {
+    type: 'SET_TAG_LIST',
+    payload: tagList
+  }
+}
   
 export default metaDataReducer;
   
