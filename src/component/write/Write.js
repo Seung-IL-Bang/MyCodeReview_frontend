@@ -4,6 +4,7 @@ import MarkdownSubmit from "./MarkdownSubmit";
 import TitleForm from "./TitleForm";
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import Tag from './Tag';
 
 export default function Write(props) {
 
@@ -65,6 +66,7 @@ export default function Write(props) {
   return (
     <div>
       <TitleForm ref={childTitleRef} />
+      <Tag />
       <MarkdownInput ref={childMarkdownRef} initialValue={""} />
       <MarkdownSubmit onSaveBoard={handleSubmitBoard}/>
     </div>
