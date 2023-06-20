@@ -7,6 +7,10 @@ export default function Board(props) {
 
   const navigate = useNavigate()
 
+  const tagList = props.tagList.map((tag, index) => (
+    <div key={`tag${index}`}>{tag}</div>
+  ));
+
   const moveToViewPage = () => {
     navigate(`/review/${props.id}`)
   }
@@ -20,9 +24,9 @@ export default function Board(props) {
       <Card.Body onClick={moveToViewPage}>
         <Card.Title>{props.title}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">difficulty</Card.Subtitle>
-        <Card.Text>
-          Tags
-        </Card.Text>
+        <div className={classes.tag_list}>
+          {tagList}
+        </div>
         <Card.Text>
           Description
         </Card.Text>
