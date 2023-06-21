@@ -17,6 +17,14 @@
   margin-right: 8px;
 }
 
+img {
+  width: 22px;
+  height: auto;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+
 .separator {
   color: gray;
   margin: 0 8px;
@@ -39,4 +47,47 @@
 
 .tag_list > *:hover {
   background-color: #0056b3;
+}
+
+.tooltip {
+  position: relative;
+  display: block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  border-style: solid;
+  border-width: 5px;
+}
+
+.tooltip .tooltip_bottom {
+  width: 160px;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+
+.tooltip .tooltip_bottom::after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -27px;
+  border-color: transparent transparent #007bff transparent;
 }
