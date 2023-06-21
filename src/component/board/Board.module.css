@@ -21,3 +21,9 @@
   border-radius: 20px;
   font-size: 13px; /* 텍스트 크기 조정 */
 }
+
+.tag_list_wrapper {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
