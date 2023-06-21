@@ -1,7 +1,9 @@
 const initialState = {
     title: '',
     content: '',
-    tagList: []
+    tagList: [],
+    difficulty: '',
+    link: ''
   };
   
 const metaDataReducer = (state = initialState, action) => {
@@ -20,6 +22,16 @@ const metaDataReducer = (state = initialState, action) => {
         return {
           ...state,
           tagList: action.payload
+        };
+      case 'SET_LINK':
+        return {
+          ...state,
+          link: action.payload
+        }
+      case 'SET_DIFFICULTY' :
+        return {
+          ...state,
+          difficulty: action.payload
         }
       default:
         return state;
@@ -47,6 +59,19 @@ export const setTagList = (tagList) => {
     payload: tagList
   }
 }
+
+export const setLink = (link) => {
+  return {
+    type: 'SET_LINK',
+    payload: link
+  }
+}
   
+export const setDifficulty = (difficulty) => {
+  return {
+    type: 'SET_DIFFICULTY',
+    payload: difficulty
+  }
+}
 export default metaDataReducer;
   
