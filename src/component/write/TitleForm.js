@@ -1,5 +1,6 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import { InputGroup } from 'react-bootstrap';
 
 const TitleForm = forwardRef(function TitleForm(props, ref) {
 
@@ -21,13 +22,21 @@ const TitleForm = forwardRef(function TitleForm(props, ref) {
 
   return (
     <>
-      <Form.Label>제목</Form.Label>
-      <Form.Control
-        type="text"
-        placeholder='제목을 입력해주세요.'
-        value={title}
-        onChange={handleTitleChange}
-      />
+      <InputGroup className="mb-3">
+        <InputGroup.Text 
+          id="inputGroup-sizing-default"
+          >
+          제목
+        </InputGroup.Text>
+        <Form.Control
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+          type="text"
+          placeholder='제목을 입력해주세요.'
+          value={title}
+          onChange={handleTitleChange}
+        />
+      </InputGroup>
     </>
   );
 });
