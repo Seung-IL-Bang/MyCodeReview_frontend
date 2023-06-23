@@ -1,14 +1,14 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import { InputGroup } from 'react-bootstrap';
 
 const TitleForm = forwardRef(function TitleForm(props, ref) {
 
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState(props.initialValue || '');
 
   useImperativeHandle(ref, () => {
     return {
       getTitle() {
-        console.log('getTitle : ' + title)
         return title
       }
     }
@@ -22,18 +22,21 @@ const TitleForm = forwardRef(function TitleForm(props, ref) {
 
   return (
     <>
-      <Form.Label htmlFor="inputPassword5">제목</Form.Label>
-      <Form.Control
-        type="text"
-        id="inputPassword5"
-        aria-describedby="passwordHelpBlock"
-        placeholder='제목을 입력해주세요.'
-        onChange={handleTitleChange}
-      />
-      <Form.Text id="passwordHelpBlock" muted>
-        Your password must be 8-20 characters long, contain letters and numbers,
-        and must not contain spaces, special characters, or emoji.
-      </Form.Text>
+      <InputGroup className="mb-3">
+        <InputGroup.Text 
+          id="inputGroup-sizing-default"
+          >
+          제목
+        </InputGroup.Text>
+        <Form.Control
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+          type="text"
+          placeholder='제목을 입력해주세요.'
+          value={title}
+          onChange={handleTitleChange}
+        />
+      </InputGroup>
     </>
   );
 });

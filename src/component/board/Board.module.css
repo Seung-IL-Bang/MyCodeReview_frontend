@@ -6,3 +6,24 @@
 .board_card:hover {
   transform: translateY(-5px); /* 위로 살짝 띄워지는 효과 */
 }
+
+.tag_list {
+  display: flex;
+  justify-content: flex-start; /* 좌측으로 밀착 */
+  font-family: 'Trendy Font', sans-serif;
+}
+
+.tag_list > * {
+  margin-right: 10px; /* 태그 간 간격 제거 */
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 13px; /* 텍스트 크기 조정 */
+}
+
+.tag_list_wrapper {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -3,7 +3,7 @@ import Prism from "prismjs";
 import "prismjs/themes/prism.css";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js";
 import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 
 const MarkdownInput = forwardRef(function MarkdownInput(props, ref) {
   const editorRef = useRef();
@@ -12,19 +12,21 @@ const MarkdownInput = forwardRef(function MarkdownInput(props, ref) {
   useImperativeHandle(ref, () => {
     return {
       getContent() {
-
-        handleContentChange()
-        console.log('getContent: ' + content)
         return content
       }
     }
   }, [content])
 
+  useEffect(() => {
+
+      editorRef.current.getInstance().setMarkdown(props.initialValue, true)
+
+  }, [])
+
 
   const handleContentChange = (event) => {
     const markdown = editorRef.current.getInstance().getMarkdown();
     setContent(markdown)
-    return content
   }
 
   const toolbarItems = [
@@ -40,7 +42,6 @@ const MarkdownInput = forwardRef(function MarkdownInput(props, ref) {
     <>
       <Editor
         ref={editorRef}
-        initialValue={" "}
         initialEditType="markdown"
         previewStyle="vertical"
         height="600px"

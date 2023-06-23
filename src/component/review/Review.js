@@ -3,16 +3,17 @@ import Header from "../../layout/Header";
 import MarkdownViewer from "./MarkdownViewer";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Button, Spinner } from "react-bootstrap";
 
 export default function Review(props) {
   const { id } = useParams();
-  const [content, setContent] = useState();
+  const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     getBoardById(id)
       .then(res => {
-        setContent(res.content)
+        setData(res)
         setIsLoading(false)
       })
   }, [])
@@ -35,7 +36,7 @@ export default function Review(props) {
   return (
     <>
       <Header />
-      {!isLoading && <MarkdownViewer content={content} />}
+      {!isLoading ? <MarkdownViewer data={data} id={id}/> : <Spinner animation="border" />}
     </>
   );
 }
