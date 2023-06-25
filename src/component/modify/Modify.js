@@ -3,8 +3,8 @@ import MarkdownInput from "../write/MarkdownInput";
 import MarkdownModify from "./MarkdownModify";
 import Tag from "../write/Tag";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
-import { useRef, useState } from "react";
+import { useParams } from "react-router";
+import { useRef } from "react";
 import axios from "axios";
 import Link from "../write/Link";
 import Difficulty from "../write/Difficulty";
@@ -12,7 +12,6 @@ import Difficulty from "../write/Difficulty";
 
 export default function Modify(props) {
   const { id } = useParams();
-  const navigate = useNavigate();
   const childTitleRef = useRef();
   const childMarkdownRef = useRef();
   const childTagRef = useRef();
@@ -38,7 +37,7 @@ export default function Modify(props) {
 
     const res = updateToServer(title, content, tagList, link, difficulty);
 
-    navigate(`/review/${id}`);
+    window.location = `/review/${id}`
   };
 
   async function updateToServer(title, content, tagList, link, difficulty) {

@@ -1,8 +1,7 @@
-import {useRef, forwardRef, useImperativeHandle, useState } from 'react';
+import {useRef } from 'react';
 import MarkdownInput from "./MarkdownInput";
 import MarkdownSubmit from "./MarkdownSubmit";
 import TitleForm from "./TitleForm";
-import { useNavigate } from 'react-router';
 import axios from 'axios';
 import Tag from './Tag';
 import Link from './Link';
@@ -15,8 +14,6 @@ export default function Write(props) {
   const childTagRef = useRef();
   const childLinkRef = useRef();
   const childDifficultyRef = useRef();
-
-  const navigate = useNavigate();
 
   const handleSubmitBoard = () => {
     // call in MarkdownSubmit
@@ -37,7 +34,7 @@ export default function Write(props) {
     const res = uploadToServer(title, content, tagList, link, difficulty)
     
     // navigate root page
-    navigate('/')
+    window.location = '/'
   };
 
   // Authorization, username, email 
