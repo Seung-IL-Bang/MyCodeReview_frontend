@@ -48,7 +48,7 @@ export default function Home(props) {
 
   return (
     <div>
-      <Header  />
+      <Header />
       {(isLoading || !loginState) && <Spinner animation="border" />}
       {!isLoading && (loginState && data) && <Content list={data}/>} 
       <Footer />
