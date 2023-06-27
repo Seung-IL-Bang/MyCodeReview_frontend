@@ -45,7 +45,7 @@ export default function Home(props) {
 
   return (
     <div>
-      <Header />
+      <Header onSetQueryParam={setQueryParam} />
       {(isLoading || !loginState) && <Spinner animation="border" />}
       {!isLoading && loginState && data && dtoTags && <Content tags={dtoTags} list={data['dtoList']} total={data['total']} onSetQueryParam={setQueryParam} />}
       <Footer />

@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useRecoilState } from 'recoil';
 import { LoginState } from '../store/loginState';
 import { useNavigate } from 'react-router';
+import Search from './search/Search';
 
 
 function LoginModal(props) {
@@ -35,6 +36,7 @@ function LoginModal(props) {
   return (
     <>
       {loginState && <Button onClick={write} variant="outline-primary">새 글 작성</Button>}
+      {loginState && <Search onSetQueryParam={props.onSetQueryParam}/>}
       {loginState ? (
         <Button onClick={logout} className='float-end' variant='secondary'>
           Logout
