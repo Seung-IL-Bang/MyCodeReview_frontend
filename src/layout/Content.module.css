@@ -1,5 +1,27 @@
 .container {
-  display: flex;
-  justify-content: flex-start;
   margin-top: 20px;
+}
+
+.board_list {
+  display: flex;
+  flex-wrap: wrap; /* 줄바꿈 설정 */
+}
+
+.tag_list {
+  font-family: 'Trendy Font', sans-serif;
+  display: flex;
+  cursor: pointer;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 10px; /* 수평 스크롤이 있을 경우, 하단 여백을 추가하여 요소들이 잘 보이도록 조정 */
+}
+.tag_list div {
+  margin: 0 5px;
+  flex-shrink: 0; /* 크기를 유지 */
+  background-color: #e4e7ea;
+  border-radius: 5px;
+  justify-content: center;
+}
+.tag_list span {
+  color: gray;
 }

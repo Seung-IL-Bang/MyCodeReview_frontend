@@ -14,13 +14,13 @@ export default function Content(props) {
   }
 
   const tagList = Object.entries(props.tags).map(([key, value]) => (
-    <div key={key}>
-      <button onClick={() => handleFilteringTag(key)}>{key}</button><span>{value}</span>
+    <div key={key} onClick={() => handleFilteringTag(key)}>
+      <div>{key}<span>{` (${value})`}</span></div>
     </div>
   ));
 
   const boardList = props.list.map((board) => (
-    <Col key={`board${board.id}`} >
+    <Col key={`board${board.id}`} xs={12} sm={6} md={4} lg={3}>
       <Board
         id={board.id}
         email={board.email}
@@ -35,11 +35,13 @@ export default function Content(props) {
   
   return (
     <Container className={classes.container}>
-      <Row>
-        <button onClick={handleTotalView}>전체 보기<span>{props.total}</span></button>
+      <div id="total" className={classes.tag_list}>
+        <div key={'전체 보기'} onClick={handleTotalView}>
+          <div>전체 보기<span>{` (${props.total})`}</span></div>
+        </div>
         {tagList}
-      </Row>
-      <Row>
+      </div>
+      <Row className={classes.board_list}>
         {boardList}
       </Row>
     </Container>
