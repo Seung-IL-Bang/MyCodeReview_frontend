@@ -1,0 +1,12 @@
+.col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.label_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}

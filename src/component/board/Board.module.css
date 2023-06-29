@@ -1,16 +1,22 @@
 .board_card {
   position: relative;
   transition: transform 0.3s ease; /* hover 효과를 위한 transition 설정 */
+  margin-top: 20px;
+  height: 125px;
+  width: 100%;
 }
 
 .board_card:hover {
   transform: translateY(-5px); /* 위로 살짝 띄워지는 효과 */
+  box-shadow: 4px 4px 10px rgba(0,0,0, .15); /* 그림자 효과 */
+  transition: .5s;
 }
 
 .tag_list {
   display: flex;
   justify-content: flex-start; /* 좌측으로 밀착 */
   font-family: 'Trendy Font', sans-serif;
+  margin-top: 5px;
 }
 
 .tag_list > * {
@@ -23,7 +29,8 @@
 }
 
 .tag_list_wrapper {
-  overflow: hidden;
+  overflow-x: auto;
+  padding-bottom: 10px; /* 수평 스크롤이 있을 경우, 하단 여백을 추가하여 요소들이 잘 보이도록 조정 */
   text-overflow: ellipsis;
   white-space: nowrap;
 }

@@ -1,0 +1,35 @@
+.search {
+  height: 34px;
+  position: relative;
+
+}
+.search input {
+  width: 36px;
+  height: 34px;
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+  outline: none; /* 포커스시 기본 파란색 테두리 제거; border 속성 처럼 다루기 쉽지 않기 때문에 제거*/
+  background-color: #fff;
+  color: #777;
+  font-size: 12px;
+  transition: width .4s;
+}
+.search input:focus {
+  width: 190px;
+  border-color: #007bff;
+}
+.search img {
+  position: absolute;
+  pointer-events: none; /* img 요소가 마우스 이벤트를 받지 않도록 설정 */
+  height: 24px; /* google material icon에서 제공되는 아이콘 높이*/
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  transition: .4s; /* 아이콘 자연스럽게 사라짐 */
+}
+.search.focused img {
+   opacity: 0; /* 검색창 포커스 -> 투명도 100% */
+}
