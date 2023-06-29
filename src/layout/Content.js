@@ -1,4 +1,5 @@
 import Board from "../component/board/Board";
+import Option from "../component/options/Option";
 import { Container, Row, Col } from "react-bootstrap";
 import classes from "./Content.module.css"
 
@@ -41,6 +42,7 @@ export default function Content(props) {
         </div>
         {tagList}
       </div>
+      <Option onSetQueryParam={props.onSetQueryParam}/>
       <Row className={classes.board_list}>
         {boardList}
       </Row>
