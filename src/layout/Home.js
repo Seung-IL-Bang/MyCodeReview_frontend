@@ -14,6 +14,7 @@ export default function Home(props) {
   const [data, setData] = useState(null);
   const [dtoTags, setDtoTags] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   const getBoardList = async (queryParam) => {
     const accessToken = localStorage.getItem("accessToken");
@@ -33,6 +34,11 @@ export default function Home(props) {
     if (loginState) {
       getBoardList(queryParam)
         .then((res) => {
+          if (!queryParam.includes("page")) {
+            setPage(1)
+          } else {
+            setPage(res.page)
+          }
           setData(res);
           setDtoTags(res.dtoTags);
           setIsLoading(false);
@@ -48,7 +54,7 @@ export default function Home(props) {
       <Header onSetQueryParam={setQueryParam} />
       {(isLoading || !loginState) && <Spinner animation="border" />}
       {!isLoading && loginState && data && dtoTags && <Content tags={dtoTags} list={data['dtoList']} total={data['total']} onSetQueryParam={setQueryParam} />}
-      <Footer />
+      {!isLoading && <Footer page={page} queryParam={queryParam} onSetQueryParam={setQueryParam} start={data["start"]} end={data["end"]} prev={data["prev"]} next={data["next"]} />}
     </div>
   );
 }
