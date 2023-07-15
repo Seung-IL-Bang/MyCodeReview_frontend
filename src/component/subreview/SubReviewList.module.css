@@ -1,0 +1,10 @@
+.subtitle {
+    color: gray;
+    margin: 1px 8px;
+}
+
+.subtitle:hover {
+    color: black;
+    transition: .5s;
+    cursor: pointer;
+}
