@@ -2,6 +2,8 @@ import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import { Viewer } from '@toast-ui/react-editor';
 import { Container, Row, Col } from 'react-bootstrap';
 import MetaData from './MetaData';
+import SubReviewList from '../subreview/SubReviewList';
+
 
 import Prism from 'prismjs';
 import 'prismjs/themes/prism.css';
@@ -15,11 +17,14 @@ export default function MarkdownViewer(props) {
     <Container className="d-flex justify-content-center" style={{ height: '100vh' }}>
       <Container>
         <Row className="justify-content-center">
-          <Col lg={8}>
+          <Col lg={8} style={{position: 'relative'}}>
             <MetaData data={props.data} id={props.id}/>
             <Viewer 
               initialValue={props.data.content}
               plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]} />
+            <div style={{ position: 'absolute', top: '100px', right: '-200px' }}>
+              <SubReviewList subreviews={props.data['reviewList']} boardId={props.id} boardTitle={props.data.title} />
+            </div>  
           </Col>
         </Row>
       </Container>
