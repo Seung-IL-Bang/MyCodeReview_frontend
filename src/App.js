@@ -6,6 +6,7 @@ import Write from "./component/write/Write";
 import Review from "./component/review/Review";
 import Modify from "./component/modify/Modify";
 import SubReview from "./component/subreview/SubReview";
+import SubWrite from "./component/write/SubWrite";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/write" element={<Write />} />
+        <Route path="/write/sub/:id" element={<SubWrite />} />
         <Route path="/modify/:id" element={<Modify />} />
         <Route path="/review/:id" element={<Review />}/>
         <Route path="/review/sub/:id" element={<SubReview />}/> 
