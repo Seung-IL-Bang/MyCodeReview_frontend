@@ -20,10 +20,10 @@ export default function MarkdownViewer(props) {
           <Col lg={8} style={{position: 'relative'}}>
             <MetaData data={props.data} id={props.id}/>
             <Viewer 
-              initialValue={props.data.content}
+              initialValue={props.content}
               plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]} />
-            <div style={{ position: 'absolute', top: '100px', right: '-200px' }}>
-              <SubReviewList subreviews={props.data['reviewList']} boardId={props.id} boardTitle={props.data.title} />
+            <div style={{ position: 'absolute', top: '200px', right: '-130px' }}>
+              <SubReviewList data={props.data} boardId={props.id} />
             </div>  
           </Col>
         </Row>
