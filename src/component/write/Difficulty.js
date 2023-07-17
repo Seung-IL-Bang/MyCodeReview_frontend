@@ -24,7 +24,7 @@ const Difficulty = forwardRef(function(props, ref) {
 
   return (
     <div className='d-flex'>
-    <DropdownButton id="dropdown-basic-button" title="문제 난이도">
+    <DropdownButton id="dropdown-basic-button" title="문제 난이도" disabled={props.readOnly}>
       <Dropdown.Item onClick={() => handleSelectDifficulty('diamond')}><img src='https://d2gd6pc034wcta.cloudfront.net/tier/21-a.svg' alt='diamond'/></Dropdown.Item>
       <Dropdown.Item onClick={() => handleSelectDifficulty('diamond5')}><img src='https://d2gd6pc034wcta.cloudfront.net/tier/21.svg' alt='diamond5'/></Dropdown.Item>
       <Dropdown.Item onClick={() => handleSelectDifficulty('diamond4')}><img src='https://d2gd6pc034wcta.cloudfront.net/tier/22.svg' alt='diamond4'/></Dropdown.Item>

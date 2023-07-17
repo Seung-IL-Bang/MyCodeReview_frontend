@@ -35,6 +35,7 @@ const TitleForm = forwardRef(function TitleForm(props, ref) {
           placeholder='제목을 입력해주세요.'
           value={title}
           onChange={handleTitleChange}
+          readOnly={props.readOnly}
         />
       </InputGroup>
     </>

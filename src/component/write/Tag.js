@@ -51,6 +51,7 @@ const Tag = forwardRef(function Tag(props, ref) {
           onChange={e => setTagItem(e.target.value)}
           value={tagItem}
           onKeyUp={onKeyPress}
+          readOnly={props.readOnly}
         />
       </TagBox>
     </WholeBox>
