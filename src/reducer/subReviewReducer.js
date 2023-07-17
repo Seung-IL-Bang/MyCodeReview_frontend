@@ -1,6 +1,7 @@
 const initialState = {
   data: "",
-  content: ""
+  content: "",
+  title: ""
 };
 
 const subReviewReducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const subReviewReducer = (state = initialState, action) => {
       return {
         ...state,
         content: action.payload,
+      }
+    case "SET_SUB_TITLE":
+      return {
+        ...state,
+        title: action.payload
       }
     default:
       return state;
@@ -31,6 +37,13 @@ export const setSubContent = (content) => {
   return {
     type: "SET_SUB_CONTENT",
     payload: content
+  }
+}
+
+export const setSubTitle = (title) => {
+  return {
+    type: "SET_SUB_TITLE",
+    payload: title
   }
 }
 
