@@ -18,7 +18,7 @@ export default function SubReviewList(props) {
   const handleGetSubReview = (subReviewId, subReviewContent) => {
     dispatch(setData(props.data));
     dispatch(setSubContent(subReviewContent));
-    navigate(`/review/sub/${subReviewId}`);
+    window.location = `/review/sub/${subReviewId}`;
   };
 
   const handleAddReview = () => {};
