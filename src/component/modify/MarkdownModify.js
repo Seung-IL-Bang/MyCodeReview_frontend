@@ -13,7 +13,7 @@ function MarkdownModify(props) {
 
   return (
     <>
-      <Button onClick={props.onModifyBoard} variant="primary" size="lg" active>
+      <Button onClick={props.isSub? props.onModifySubReview : props.onModifyBoard} variant="primary" size="lg" active>
         수정하기
       </Button>
       <Button onClick={handleGoToBack} variant="secondary" size="lg" active>
