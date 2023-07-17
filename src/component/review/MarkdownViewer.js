@@ -18,11 +18,11 @@ export default function MarkdownViewer(props) {
       <Container>
         <Row className="justify-content-center">
           <Col lg={8} style={{position: 'relative'}}>
-            <MetaData data={props.data} id={props.id}/>
+            <MetaData data={props.data} content={props.content} subTitle={props.subTitle} boardId={props.id} isSub={props.isSub} subReviewId={props.subReviewId}/>
             <Viewer 
               initialValue={props.content}
               plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]} />
-            <div style={{ position: 'absolute', top: '58%', right: '-200px' }}>
+            <div style={{ position: 'absolute', top: '58%', right: '-210px' }}>
               <SubReviewList data={props.data} boardId={props.id} />
             </div>  
           </Col>
