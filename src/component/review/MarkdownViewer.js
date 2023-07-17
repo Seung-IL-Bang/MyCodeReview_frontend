@@ -22,7 +22,7 @@ export default function MarkdownViewer(props) {
             <Viewer 
               initialValue={props.content}
               plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]} />
-            <div style={{ position: 'absolute', top: '50%', right: '-200px' }}>
+            <div style={{ position: 'absolute', top: '58%', right: '-200px' }}>
               <SubReviewList data={props.data} boardId={props.id} />
             </div>  
           </Col>
