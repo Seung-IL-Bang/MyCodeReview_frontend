@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import classes from "./SubReviewList.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { setData, setSubContent } from "../../reducer/subReviewReducer";
+import { setData, setSubContent, setSubTitle } from "../../reducer/subReviewReducer";
 import { setTitle, setTagList, setLink, setDifficulty } from "../../reducer/metaDataReducer";
 
 export default function SubReviewList(props) {
@@ -15,9 +15,10 @@ export default function SubReviewList(props) {
     window.location = `/review/${props.boardId}`
   };
 
-  const handleGetSubReview = (subReviewId, subReviewContent) => {
+  const handleGetSubReview = (subReviewId, subReviewContent, subReviewTitle) => {
     dispatch(setData(props.data));
     dispatch(setSubContent(subReviewContent));
+    dispatch(setSubTitle(subReviewTitle))
     window.location = `/review/sub/${subReviewId}`;
   };
 
@@ -33,7 +34,7 @@ export default function SubReviewList(props) {
   const subReviews = props.data.reviewList.map((subReview, index) => (
     <div className={classes.subtitle} key={`subreview${subReview.id}`}>
       <span>{`${index + 1}. `}</span>
-      <span onClick={() => handleGetSubReview(subReview.id, subReview.content)}>
+      <span onClick={() => handleGetSubReview(subReview.id, subReview.content, subReview.subTitle)}>
         {subReview.subTitle}
       </span>
     </div>
