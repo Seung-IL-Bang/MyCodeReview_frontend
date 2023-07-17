@@ -5,7 +5,7 @@ import classes from "./SubReviewList.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { setData, setSubContent } from "../../reducer/subReviewReducer";
-import { setContent } from "../../reducer/metaDataReducer";
+import { setTitle, setTagList, setLink, setDifficulty } from "../../reducer/metaDataReducer";
 
 export default function SubReviewList(props) {
   const navigate = useNavigate();
@@ -21,7 +21,14 @@ export default function SubReviewList(props) {
     window.location = `/review/sub/${subReviewId}`;
   };
 
-  const handleAddReview = () => {};
+  const handleAddReview = (boardId) => {
+    dispatch(setTitle(props.data.title));
+    dispatch(setTagList(props.data.tagList));
+    dispatch(setLink(props.data.link));
+    dispatch(setDifficulty(props.data.difficulty))
+    navigate(`/write/sub/${boardId}`)
+
+  };
 
   const subReviews = props.data.reviewList.map((subReview, index) => (
     <div className={classes.subtitle} key={`subreview${subReview.id}`}>
@@ -35,7 +42,7 @@ export default function SubReviewList(props) {
   return (
     <div>
       <div>
-        <Button variant="primary" onClick={handleAddReview}>
+        <Button variant="primary" onClick={() => handleAddReview(props.boardId)}>
           Add Review
         </Button>
         <div
