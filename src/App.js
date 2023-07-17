@@ -7,6 +7,7 @@ import Review from "./component/review/Review";
 import Modify from "./component/modify/Modify";
 import SubReview from "./component/subreview/SubReview";
 import SubWrite from "./component/write/SubWrite";
+import SubModify from "./component/modify/SubModify";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/write" element={<Write />} />
         <Route path="/write/sub/:id" element={<SubWrite />} />
         <Route path="/modify/:id" element={<Modify />} />
+        <Route path="/modify/sub/:id" element={<SubModify />} />
         <Route path="/review/:id" element={<Review />}/>
         <Route path="/review/sub/:id" element={<SubReview />}/> 
         <Route path="/tokens" element={<GetTokens />} />
