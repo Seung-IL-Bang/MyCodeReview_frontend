@@ -11,6 +11,7 @@ import {
   setDifficulty
 } from "../../reducer/metaDataReducer";
 import SelectedDifficulty from "../write/SelectedDifficulty";
+import { setSubContent, setSubTitle } from "../../reducer/subReviewReducer";
 
 export default function MetaData(props) {
   const navigate = useNavigate();
@@ -21,19 +22,36 @@ export default function MetaData(props) {
   ));
 
   const handleDeleteBoard = () => {
-    deleteById(props.id).then((res) => {
+    deleteById(props.boardId).then((res) => {
       navigate("/");
     });
   };
 
+  const handleDeleteSubReview = () => {
+    deleteBySubReviewId(props.subReviewId)
+      .then((res) => {
+        window.location = `/review/${props.boardId}`
+      })
+  }
+
   const handleMoveToModifyPage = () => {
     dispatch(setTitle(props.data.title));
-    dispatch(setContent(props.data.content));
+    dispatch(setContent(props.content));
     dispatch(setTagList(props.data.tagList));
     dispatch(setLink(props.data.link));
     dispatch(setDifficulty(props.data.difficulty))
-    navigate(`/modify/${props.id}`);
+    navigate(`/modify/${props.boardId}`);
   };
+
+  const handleMoveToSubReviewModifyPage = () => {
+    dispatch(setTitle(props.data.title));
+    dispatch(setTagList(props.data.tagList));
+    dispatch(setLink(props.data.link));
+    dispatch(setDifficulty(props.data.difficulty))
+    dispatch(setSubContent(props.content))
+    dispatch(setSubTitle(props.subTitle))
+    navigate(`/modify/sub/${props.subReviewId}`);
+  }
 
   const handleGoToSource = (e) => {
     e.preventDefault();
@@ -54,6 +72,20 @@ export default function MetaData(props) {
     return response.data;
   };
 
+  const deleteBySubReviewId = async (subReviewId) => {
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    const response = await axios({
+      method: 'delete',
+      url: `http://localhost:8080/auth/board/review/${subReviewId}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+
+  }
+
   return (
     <>
       <div className={classes.title}>{props.data.title}</div>
@@ -72,11 +104,11 @@ export default function MetaData(props) {
               <span className={`${classes.tooltiptext} ${classes.tooltip_bottom}`}>해당 문제 페이지로 이동</span>  
             </div>
             <span className={classes.separator}>|</span>
-            <span onClick={handleMoveToModifyPage} className={classes.link}>
+            <span onClick={props.isSub ? handleMoveToSubReviewModifyPage : handleMoveToModifyPage} className={classes.link}>
               수정
             </span>
             <span className={classes.separator}>|</span>
-            <span onClick={handleDeleteBoard} className={classes.link}>
+            <span onClick={props.isSub ? handleDeleteSubReview : handleDeleteBoard} className={classes.link}>
               삭제
             </span>
           </div>
