@@ -12,10 +12,12 @@ export default function SubReview(props) {
   const [data, setData] = useState();
   const [boardId, setBoardId] = useState();
   const [content, setContent] = useState();
+  const [title, setTitle] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   const mainReviewData = useSelector((state) => state.subReview.data);
   const subContent = useSelector((state) => state.subReview.content);
+  const subTitle = useSelector((state) => state.subReview.title)
 
   useEffect(() => {
     if (!mainReviewData || !subContent) {
@@ -24,11 +26,13 @@ export default function SubReview(props) {
         setData(res);
         setBoardId(res.boardId);
         setContent(res.content);
+        setTitle(res.subTitle)
         setIsLoading(false);
       });
     } else {
       setData(mainReviewData);
       setContent(subContent);
+      setTitle(subTitle);
       setBoardId(mainReviewData.id);
       setIsLoading(false);
     }
@@ -51,7 +55,7 @@ export default function SubReview(props) {
   return (
     <>
       <Header />
-      {!isLoading ? <MarkdownViewer data={data} content={content} id={boardId} /> : <Spinner animation="border" />}
+      {!isLoading ? <MarkdownViewer subReviewId={id} isSub={true} data={data} content={content} subTitle={title} id={boardId} /> : <Spinner animation="border" />}
     </>
   );
 }
