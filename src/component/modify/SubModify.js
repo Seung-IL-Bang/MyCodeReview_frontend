@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import TitleForm from "../write/TitleForm";
 import Tag from "../write/Tag";
@@ -12,6 +12,8 @@ import { useParams } from "react-router";
 
 
 export default function SubModify(props) {
+
+    const [isModified, setIsModified] = useState(false);
     
     const { id } = useParams(); // subReviewId
     const childMarkdownRef = useRef();
@@ -27,9 +29,8 @@ export default function SubModify(props) {
     const handleUpdateSubReview = () => {
       const subTitle = childSubTitleRef?.current?.getSubTitle();
       const subContent = childMarkdownRef?.current?.getContent();
-      const res = updateToServer(subTitle, subContent);
-
-      window.location = `/review/sub/${id}`
+      
+      updateToServer(subTitle, subContent);
     }
 
     // TODO: Authorization; email, writer
@@ -48,7 +49,7 @@ export default function SubModify(props) {
         subTitle: subTitle
       }
 
-      const response = await axios({
+      await axios({
         method: 'put',
         url: `http://localhost:8080/auth/board/review/${id}`,
         data: JSON.stringify(formObj),
@@ -57,7 +58,13 @@ export default function SubModify(props) {
           Authorization: `Bearer ${accessToken}`
         }
       })
+        .then(response => {setIsModified(true)})
+        .catch(e => alert(e.response.data.message));
 
+    }
+
+    if(isModified) {
+      window.location = `/review/sub/${id}`
     }
 
     return (

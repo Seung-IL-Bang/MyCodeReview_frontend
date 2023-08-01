@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import TitleForm from "./TitleForm";
@@ -12,6 +12,8 @@ import SubTitleForm from "./SubTitleForm";
 
 
 export default function SubWrite(props) {
+
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const { id } = useParams(); // boardId
 
@@ -29,9 +31,7 @@ export default function SubWrite(props) {
       const subTitle = childSubTitleRef?.current?.getSubTitle();
 
 
-      const res = postToServer(subTitle, subContent)
-
-      window.location = `/review/${id}`
+      postToServer(subTitle, subContent)
     }
 
 
@@ -52,7 +52,7 @@ export default function SubWrite(props) {
         'content': subContent
       }
 
-      const responsee = await axios({
+      await axios({
         method: 'post',
         url: `http://localhost:8080/auth/board/review/${id}`,
         data: JSON.stringify(formObj),
@@ -61,10 +61,15 @@ export default function SubWrite(props) {
           'Authorization': `Bearer ${accessToken}`
         }
       })
+        .then(response => {setIsSubmitted(true)})
+        .catch(e => {alert(e.response.data.message)})
 
-      return responsee.data
+      
     }
 
+    if(isSubmitted) {
+      window.location = `/review/${id}`
+    }
     
 
     return (
