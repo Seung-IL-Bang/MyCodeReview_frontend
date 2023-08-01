@@ -40,7 +40,7 @@ const Tag = forwardRef(function Tag(props, ref) {
           return (
             <TagItem key={index}>
               <Text>{tagItem}</Text>
-              <Button onClick={deleteTagItem}>X</Button>
+              <Button onClick={deleteTagItem} disabled={props.readOnly}>X</Button>
             </TagItem>
           );
         })}
