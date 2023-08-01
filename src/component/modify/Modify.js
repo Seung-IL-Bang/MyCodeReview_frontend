@@ -4,13 +4,16 @@ import MarkdownModify from "./MarkdownModify";
 import Tag from "../write/Tag";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import Link from "../write/Link";
 import Difficulty from "../write/Difficulty";
 
 
 export default function Modify(props) {
+
+  const [isModified, setIsModified] = useState(false);
+
   const { id } = useParams();
   const childTitleRef = useRef();
   const childMarkdownRef = useRef();
@@ -35,9 +38,7 @@ export default function Modify(props) {
 
     const difficulty = childDifficultyRef?.current?.getDifficulty();
 
-    const res = updateToServer(title, content, tagList, link, difficulty);
-
-    window.location = `/review/${id}`
+    updateToServer(title, content, tagList, link, difficulty);
   };
 
   async function updateToServer(title, content, tagList, link, difficulty) {
@@ -59,7 +60,7 @@ export default function Modify(props) {
       email: email,
     };
 
-    const response = await axios({
+    await axios({
       method: "put",
       url: `http://localhost:8080/auth/board/${id}`,
       data: JSON.stringify(formObj),
@@ -67,9 +68,13 @@ export default function Modify(props) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
-    });
+    })
+      .then(response => {setIsModified(true)})
+      .catch(e => alert(e.response.data.message));
+  }
 
-    return response.data;
+  if(isModified) {
+    window.location = `/review/${id}`
   }
 
   return (
