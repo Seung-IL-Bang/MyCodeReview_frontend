@@ -72,8 +72,8 @@ export default function Write(props) {
 }
 
   if(isSubmitted) {
-    // navigate root page
-    window.location = '/'
+    // navigate myhome page
+    window.location = '/myhome'
   }
 
   

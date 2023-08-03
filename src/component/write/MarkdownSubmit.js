@@ -7,7 +7,7 @@ function MarkdownSubmit(props) {
   const navigate = useNavigate();
 
   const handleGoToHome = () => {
-    navigate('/')
+    navigate('/myhome')
   }
 
   return (

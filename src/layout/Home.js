@@ -46,6 +46,9 @@ export default function Home(props) {
         .catch((e) => {
           alert("Exception:GET Board List");
         });
+    } else {
+      window.location = '/'
+      alert('로그인이 필요한 요청입니다.')
     }
   }, [queryParam]); // 의존성 배열에 data 넣거나 의존성 배열 미작성시 무한 요청
 

@@ -36,12 +36,14 @@ export default function Content(props) {
   
   return (
     <Container className={classes.container}>
-      <div id="total" className={classes.tag_list}>
-        <div key={'전체 보기'} onClick={handleTotalView}>
-          <div>전체 보기<span>{` (${props.total})`}</span></div>
+      {props.total && 
+        <div id="total" className={classes.tag_list}>
+          <div key={'전체 보기'} onClick={handleTotalView}>
+            <div>전체 보기<span>{` (${props.total})`}</span></div>
+          </div>
+          {tagList}
         </div>
-        {tagList}
-      </div>
+      }
       <Option onSetQueryParam={props.onSetQueryParam}/>
       <Row className={classes.board_list}>
         {boardList}

@@ -23,7 +23,7 @@ export default function MetaData(props) {
 
   const handleDeleteBoard = () => {
     deleteById(props.boardId).then((res) => {
-      navigate("/");
+      navigate("/myhome");
     });
   };
 
