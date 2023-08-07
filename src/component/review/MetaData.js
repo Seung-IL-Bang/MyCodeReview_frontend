@@ -94,7 +94,9 @@ export default function MetaData(props) {
         <SelectedDifficulty difficulty={props.data.difficulty}/>
       </Row>
       <Row className="justify-content">
-        <div className={classes.tag_list}>{tagList}</div>
+        <div className={classes.tag_list_wrapper}>
+          <div className={classes.tag_list}>{tagList}</div>
+        </div>
       </Row>
       <Row className="justify-content-end">
         <Col>
