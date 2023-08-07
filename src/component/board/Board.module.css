@@ -2,7 +2,7 @@
   position: relative;
   transition: transform 0.3s ease; /* hover 효과를 위한 transition 설정 */
   margin-top: 20px;
-  height: 125px;
+  height: 150px;
   width: 100%;
 }
 
@@ -30,7 +30,34 @@
 
 .tag_list_wrapper {
   overflow-x: auto;
-  padding-bottom: 10px; /* 수평 스크롤이 있을 경우, 하단 여백을 추가하여 요소들이 잘 보이도록 조정 */
   text-overflow: ellipsis;
   white-space: nowrap;
+  scrollbar-width: none; /* 스크롤바를 사용하지만 화면상에 나타내지 않기 1 */
+}
+
+/* 스크롤바를 사용하지만 화면상에 나타내지 않기 2*/
+.tag_list_wrapper::-webkit-scrollbar {
+  width: 0.5em;
+}
+.tag_list_wrapper::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+.tag_list_wrapper::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+
+
+.writer {
+  font-family: 'Trendy Font', sans-serif;
+  white-space: nowrap; /* 줄바꿈 없이 텍스트를 한 줄에 표시 */
+  overflow: hidden; /* 너비를 넘어가는 텍스트를 숨김 */
+  text-overflow: ellipsis; /* 생략 부호 (...) 추가 */
+}
+
+.title {
+  font-family: 'Trendy Font', sans-serif;
+  white-space: nowrap; /* 줄바꿈 없이 텍스트를 한 줄에 표시 */
+  overflow: hidden; /* 너비를 넘어가는 텍스트를 숨김 */
+  text-overflow: ellipsis; /* 생략 부호 (...) 추가 */
 }
