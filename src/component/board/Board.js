@@ -25,6 +25,10 @@ export default function Board(props) {
           <div className={classes.tag_list}>{tagList}</div>
         </div>
         <div className={classes.writer}>{'by ' + props.writer}</div>
+        <div>
+          <img src="/favorite.png" alt="favorite"/>
+          <span>{props.likeCount}</span>
+        </div>
       </Card.Body>
     </Card>
   );

@@ -30,6 +30,7 @@ export default function Content(props) {
         difficulty={board.difficulty}
         writer={board.writer}
         title={board.title}
+        likeCount={board.likeCount}
       />
     </Col>
   ));
