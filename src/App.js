@@ -9,6 +9,7 @@ import SubReview from "./component/subreview/SubReview";
 import SubWrite from "./component/write/SubWrite";
 import SubModify from "./component/modify/SubModify";
 import MainHome from "./component/MainHome";
+import Favorites from "./component/Favorites";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainHome />} />
         <Route path="/myhome" element={<Home />} />
+        <Route path="/lists/liked" element={<Favorites />} />
         <Route path="/write" element={<Write />} />
         <Route path="/write/sub/:id" element={<SubWrite />} />
         <Route path="/modify/:id" element={<Modify />} />
