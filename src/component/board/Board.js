@@ -26,7 +26,7 @@ export default function Board(props) {
         </div>
         <div className={classes.writer}>{'by ' + props.writer}</div>
         <div>
-          <img src="/favorite.png" alt="favorite"/>
+          <img src="/favorite_fill.png" alt="favorite_fill"/>
           <span>{props.likeCount}</span>
         </div>
       </Card.Body>
