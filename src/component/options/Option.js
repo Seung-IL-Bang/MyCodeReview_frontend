@@ -7,6 +7,7 @@ export default function Option(props) {
 
   const [isClick, setIsClick] = useState(false);
   const [checkedList, setCheckedList] = useState([]);
+  const [disabled, setDisabled] = useState(props.disabled);
 
   const handleOption = () => {
     setIsClick((prevState) => {
@@ -62,15 +63,15 @@ export default function Option(props) {
         setCheckedList((prevCheckboxes) => prevCheckboxes.filter((checkbox) => checkbox !== name.slice(0, name.length - 1)));
       }
     }
-
-    console.log(checkedList)
-    
   };
 
   
   return (
     <div>
-      <div className={classes.option} onClick={handleOption}>옵션<b className={`${classes.caret} ${isClick ? classes.rotate : ''}`}></b></div>
+      {
+        !disabled &&
+        <div className={classes.option} onClick={handleOption}>옵션<b className={`${classes.caret} ${isClick ? classes.rotate : ''}`}></b></div>
+      }
       {isClick && 
       <div>
         <Row className={classes.title}>문제 난이도</Row>
