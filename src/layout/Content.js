@@ -45,7 +45,7 @@ export default function Content(props) {
           {tagList}
         </div>
       }
-      <Option onSetQueryParam={props.onSetQueryParam}/>
+      <Option onSetQueryParam={props.onSetQueryParam} disabled={props.disabled}/>
       <Row className={classes.board_list}>
         {boardList}
       </Row>

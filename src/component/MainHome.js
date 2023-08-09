@@ -28,6 +28,11 @@ export default function MainHome(props) {
   useEffect(() => {
     getPublicBoardListWithPaging(queryParam)
       .then((res) => {
+        if(!queryParam.includes("page")) {
+          setPage(1)
+        } else {
+          setPage(res.page)
+        }
         setData(res)
         setIsLoading(false)
       }).catch((e) => {

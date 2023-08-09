@@ -40,6 +40,10 @@ function Menu(props) {
     navigate("/write")
   }
   
+  const myFavorites = () => {
+    navigate("/lists/liked")
+  }
+  
   return (
     <>
       <Search onSetQueryParam={props.onSetQueryParam}/>
@@ -47,7 +51,7 @@ function Menu(props) {
       {loginState ? (
         <DropdownButton id="dropdown-basic-button" title="Menu">
           <Dropdown.Item onClick={myReviews}>My Reviews</Dropdown.Item>
-          <Dropdown.Item href="/list/liked">My Favorites</Dropdown.Item>
+          <Dropdown.Item onClick={myFavorites}>My Favorites</Dropdown.Item>
           <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
         </DropdownButton>
       ) : (
