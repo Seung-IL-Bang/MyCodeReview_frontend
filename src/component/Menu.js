@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router';
 import Search from './search/Search';
 
 
-function LoginModal(props) {
+function Menu(props) {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
@@ -76,4 +76,4 @@ function LoginModal(props) {
   );
 }
 
-export default LoginModal;
+export default Menu;
