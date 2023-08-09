@@ -3,6 +3,8 @@
 .title {
   font-size: 40px;
   font-weight: bold;
+  overflow-wrap: break-word; /* 너비를 넘어가는 단어를 자르고 줄바꿈 */
+  word-wrap: break-word; /* 웹킷 브라우저 호환을 위한 속성 추가 */
 }
 
 .action_links {
@@ -47,6 +49,24 @@ img {
 
 .tag_list > *:hover {
   background-color: #0056b3;
+}
+
+.tag_list_wrapper {
+  overflow-x: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  scrollbar-width: none; /* 스크롤바를 사용하지만 화면상에 나타내지 않기 1 */
+}
+
+/* 스크롤바를 사용하지만 화면상에 나타내지 않기 2*/
+.tag_list_wrapper::-webkit-scrollbar {
+  width: 0.5em;
+}
+.tag_list_wrapper::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+.tag_list_wrapper::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 .tooltip {

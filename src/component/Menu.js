@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useRecoilState } from 'recoil';
 import { LoginState } from '../store/loginState';
 import { useNavigate } from 'react-router';
 import Search from './search/Search';
 
 
-function LoginModal(props) {
+function Menu(props) {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
@@ -27,20 +29,31 @@ function LoginModal(props) {
     window.localStorage.clear()
     setLoginState(false)
     // TODO: alert("logout.")
+    navigate("/")
+  }
+
+  const myReviews = () => {
+    navigate("/myhome")
   }
 
   const write = () => {
     navigate("/write")
   }
   
+  const myFavorites = () => {
+    navigate("/lists/liked")
+  }
+  
   return (
     <>
+      <Search onSetQueryParam={props.onSetQueryParam}/>
       {loginState && <Button onClick={write} variant="outline-primary">새 글 작성</Button>}
-      {loginState && <Search onSetQueryParam={props.onSetQueryParam}/>}
       {loginState ? (
-        <Button onClick={logout} className='float-end' variant='secondary'>
-          Logout
-        </Button>
+        <DropdownButton id="dropdown-basic-button" title="Menu">
+          <Dropdown.Item onClick={myReviews}>My Reviews</Dropdown.Item>
+          <Dropdown.Item onClick={myFavorites}>My Favorites</Dropdown.Item>
+          <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+        </DropdownButton>
       ) : (
         <Button className="float-end" variant="primary" onClick={handleShow}>
           Login
@@ -67,4 +80,4 @@ function LoginModal(props) {
   );
 }
 
-export default LoginModal;
+export default Menu;

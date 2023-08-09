@@ -1,8 +1,9 @@
+
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router';
 
 
-function MarkdownModify(props) {
+function SubReviewAdd(props) {
   
 
   const navigate = useNavigate();
@@ -13,8 +14,8 @@ function MarkdownModify(props) {
 
   return (
     <>
-      <Button onClick={props.isSub? props.onModifySubReview : props.onModifyBoard} variant="primary" size="lg" active>
-        수정하기
+      <Button onClick={props.onAddSubReview} variant="primary" size="lg" active>
+        리뷰추가
       </Button>
       <Button onClick={handleGoToBack} variant="secondary" size="lg" active>
         뒤로가기
@@ -23,4 +24,4 @@ function MarkdownModify(props) {
   );
 }
 
-export default MarkdownModify;
+export default SubReviewAdd;

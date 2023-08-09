@@ -29,6 +29,7 @@ const Link = forwardRef(function Link(props, ref) {
       placeholder='문제 링크를 입력해주세요.'
       value={link}
       onChange={handleLinkChange}
+      readOnly={props.readOnly}
     />
   </InputGroup>
   );

@@ -11,11 +11,11 @@ export default function Review(props) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    getBoardById(id)
-      .then(res => {
-        setData(res)
-        setIsLoading(false)
-      })
+      getBoardById(id)
+        .then(res => {
+          setData(res)
+          setIsLoading(false)
+        })
   }, [])
 
   const getBoardById = async (id) => {
@@ -36,7 +36,7 @@ export default function Review(props) {
   return (
     <>
       <Header />
-      {!isLoading ? <MarkdownViewer data={data} id={id}/> : <Spinner animation="border" />}
+      {!isLoading ? <MarkdownViewer data={data} content={data.content} id={id}/> : <Spinner animation="border" />}
     </>
   );
 }

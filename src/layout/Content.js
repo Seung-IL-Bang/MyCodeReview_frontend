@@ -30,19 +30,22 @@ export default function Content(props) {
         difficulty={board.difficulty}
         writer={board.writer}
         title={board.title}
+        likeCount={board.likeCount}
       />
     </Col>
   ));
   
   return (
     <Container className={classes.container}>
-      <div id="total" className={classes.tag_list}>
-        <div key={'전체 보기'} onClick={handleTotalView}>
-          <div>전체 보기<span>{` (${props.total})`}</span></div>
+      {props.total && 
+        <div id="total" className={classes.tag_list}>
+          <div key={'전체 보기'} onClick={handleTotalView}>
+            <div>전체 보기<span>{` (${props.total})`}</span></div>
+          </div>
+          {tagList}
         </div>
-        {tagList}
-      </div>
-      <Option onSetQueryParam={props.onSetQueryParam}/>
+      }
+      <Option onSetQueryParam={props.onSetQueryParam} disabled={props.disabled}/>
       <Row className={classes.board_list}>
         {boardList}
       </Row>

@@ -25,7 +25,7 @@ export default function GetUserInfo(props) {
 
       setLoginState(true);
       window.localStorage.setItem('userinfo', JSON.stringify(data))
-      navigate("/");
+      navigate("/myhome");
     }
   }
 

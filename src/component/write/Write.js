@@ -1,4 +1,4 @@
-import {useRef } from 'react';
+import {useRef, useState } from 'react';
 import MarkdownInput from "./MarkdownInput";
 import MarkdownSubmit from "./MarkdownSubmit";
 import TitleForm from "./TitleForm";
@@ -8,6 +8,8 @@ import Link from './Link';
 import Difficulty from './Difficulty';
 
 export default function Write(props) {
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const childTitleRef = useRef();
   const childMarkdownRef = useRef();
@@ -31,10 +33,7 @@ export default function Write(props) {
     const difficulty = childDifficultyRef?.current?.getDifficulty();
 
     // axios post method
-    const res = uploadToServer(title, content, tagList, link, difficulty)
-    
-    // navigate root page
-    window.location = '/'
+    uploadToServer(title, content, tagList, link, difficulty)
   };
 
   // Authorization, username, email 
@@ -59,7 +58,7 @@ export default function Write(props) {
     }
 
 
-    const response = await axios({
+    await axios({
         method: 'post',
         url: 'http://localhost:8080/auth/board',
         data: JSON.stringify(formObj),
@@ -67,13 +66,17 @@ export default function Write(props) {
             'Content-Type': 'application/json',
             'Authorization' : `Bearer ${accessToken}`
         }
-    });
-
-    return response.data
+      })
+      .then(response => {setIsSubmitted(true)})
+      .catch(e => {alert(e.response.data.message)});
 }
 
-  
+  if(isSubmitted) {
+    // navigate myhome page
+    window.location = '/myhome'
+  }
 
+  
   return (
     <div>
       <TitleForm ref={childTitleRef} />
