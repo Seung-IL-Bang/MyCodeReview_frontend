@@ -83,7 +83,10 @@ export default function Like(props) {
 
     return (
         <div>
-            <img src="/favorite.png" alt="favorite" onClick={handleLikeChange}/>
+            {isLiked 
+                ? <img src="/favorite_fill.png" alt="favorite_fill" onClick={handleLikeChange}/> 
+                : <img src="/favorite.png" alt="favorite" onClick={handleLikeChange}/>
+            }
             <div>{likeCount}</div>
         </div>
     );
