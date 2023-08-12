@@ -24,10 +24,7 @@ export default function Review(props) {
 
     const response = await axios({
       method: 'get',
-      url: `http://localhost:8080/auth/board/${id}`,
-      headers: {
-        'Authorization' : `Bearer ${accessToken}`
-      }
+      url: `http://localhost:8080/board/${id}`,
     })
     
     return response.data
