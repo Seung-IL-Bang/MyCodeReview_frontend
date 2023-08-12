@@ -10,9 +10,18 @@ import 'prismjs/themes/prism.css';
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js";
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import Like from '../like/Like';
+import Comment from '../comment/Comment';
+import { useEffect, useState } from 'react';
 
 
 export default function MarkdownViewer(props) {  
+
+  const [comments, setComments] = useState(props.data.commentList);
+
+  const addComment = (newComment) => {
+    const newComments = newComment.concat(comments)
+    setComments(newComments);
+  }
 
   return (
     <Container className="d-flex justify-content-center" style={{ height: '100vh' }}>
@@ -28,10 +37,13 @@ export default function MarkdownViewer(props) {
                 <Like boardId={props.id} isLiked={props.data.liked} likeCount={props.data.likeCount} />
               </div>
             </div>
-              <Viewer 
-                initialValue={props.content}
-                plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}>
-              </Viewer>
+            <Viewer 
+              initialValue={props.content}
+              plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}>
+            </Viewer>
+            <hr />
+            <br />
+            <Comment boardId={props.id} comments={comments} onAddComment={addComment}></Comment>
           </Col>
         </Row>
       </Container>
