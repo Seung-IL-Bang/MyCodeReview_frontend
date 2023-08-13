@@ -3,17 +3,37 @@ import classes from "./CommentList.module.css";
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import axios from "axios";
 
 
 export default function CommentList(props) {
 
   const [show, setShow] = useState(false);
+  const [commentId, setCommentId] = useState();
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (id) => {
+    setShow(true)
+    setCommentId(id)
+  };
 
-  const handleDeleteComment = () => {
+  const handleDeleteComment = async (commentId) => {
+
+    const accessToken = localStorage.getItem('accessToken')
+    const refreshToken = localStorage.getItem('refreshToken')
     
+    await axios({
+      method: 'delete',
+      url: `http://localhost:8080/auth/comment/${commentId}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+      })
+        .then(res => {
+          props.onRemoveComment(commentId);
+          handleClose();
+        })
+        .catch(e => alert(e.response.data.message));
   }
 
   const handleModify = () => {
@@ -30,7 +50,7 @@ export default function CommentList(props) {
         <div className={classes.action}>
           <span>수정</span>
           <span className={classes.separator}>|</span>
-          <sapn onClick={handleShow}>삭제</sapn>
+          <sapn onClick={() => handleShow(comment.id)}>삭제</sapn>
         </div>
       </div>
       <div>{comment.content}</div>
@@ -58,7 +78,7 @@ export default function CommentList(props) {
           <Button variant="secondary" onClick={handleClose}>
             취소
           </Button>
-          <Button variant="primary">삭제</Button>
+          <Button variant="primary" onClick={() => handleDeleteComment(commentId)}>삭제</Button>
         </Modal.Footer>
       </Modal>
     </div>

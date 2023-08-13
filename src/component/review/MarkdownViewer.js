@@ -23,6 +23,12 @@ export default function MarkdownViewer(props) {
     setComments(newComments);
   }
 
+  const removeComment = (commentId) => {
+    const index = comments.findIndex(comment => comment.id === commentId);
+    comments.splice(index, 1);
+    setComments(comments);
+  }
+
   return (
     <Container className="d-flex justify-content-center" style={{ height: '100vh' }}>
       <Container>
@@ -43,7 +49,7 @@ export default function MarkdownViewer(props) {
             </Viewer>
             <hr />
             <br />
-            <Comment boardId={props.id} comments={comments} onAddComment={addComment}></Comment>
+            <Comment boardId={props.id} comments={comments} onAddComment={addComment} onRemoveComment={removeComment}></Comment>
           </Col>
         </Row>
       </Container>

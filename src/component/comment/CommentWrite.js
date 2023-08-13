@@ -5,10 +5,7 @@ import { useNavigate } from 'react-router';
 
 export default function CommentWrite(props) {
   
-
   const [enteredComment, setEnteredComment] = useState('');
-
-  const navigate = useNavigate();
 
   const handleComment = (event) => {
     setEnteredComment(event.target.value)
@@ -50,7 +47,6 @@ export default function CommentWrite(props) {
         const newComment = new Array(Object.assign(formObj, {'id': res.data.id}))
         props.onAddComment(newComment);
         setEnteredComment('');
-        navigate(`/review/${props.boardId}`)
       })
       .catch(e => {
         alert(e.response.data.message);
