@@ -4,11 +4,13 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
+import CommentModify from "./CommentModify";
 
 
 export default function CommentList(props) {
 
   const [show, setShow] = useState(false);
+  const [isModified, setIsModified] = useState(0);
   const [commentId, setCommentId] = useState();
 
   const handleClose = () => setShow(false);
@@ -36,24 +38,25 @@ export default function CommentList(props) {
         .catch(e => alert(e.response.data.message));
   }
 
-  const handleModify = () => {
-
+  const handleModify = (commentId) => {
+    setIsModified(commentId);
   }
 
 
   const commentList = props.comments.map((comment, index) => (
     <div key={comment.id} className={classes.comment_wrapper}>
       <div className={classes.metadata}>
-        <div className={classes.writer}>
-          {comment.memberEmail}
+        <div className={`${classes.writer} ${classes.tooltip}`}>
+          {comment.memberName}
+          <span className={`${classes.tooltiptext} ${classes.tooltip_bottom}`}>{comment.memberEmail}</span>
         </div>
         <div className={classes.action}>
-          <span>수정</span>
+          <span onClick={() => handleModify(comment.id)}>수정</span>
           <span className={classes.separator}>|</span>
-          <sapn onClick={() => handleShow(comment.id)}>삭제</sapn>
+          <span onClick={() => handleShow(comment.id)}>삭제</span>
         </div>
       </div>
-      <div>{comment.content}</div>
+      {isModified === comment.id ? <CommentModify commentId={comment.id} boardId={props.boardId} content={comment.content} setIsModified={setIsModified} onUpdateComment={props.onUpdateComment}/> : <div>{comment.content}</div>}
       <Reply />
     </div>
   ))
