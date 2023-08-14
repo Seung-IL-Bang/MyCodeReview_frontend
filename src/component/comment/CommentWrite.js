@@ -26,6 +26,7 @@ export default function CommentWrite(props) {
     const userData = localStorage.getItem('userinfo');
     const userInfo = JSON.parse(userData);
     const email = userInfo.email;
+    const name = userInfo.name;
 
     const formObj = {
       'content': enteredComment,
@@ -44,7 +45,7 @@ export default function CommentWrite(props) {
       }
     })
       .then(res => {
-        const newComment = new Array(Object.assign(formObj, {'id': res.data.id}))
+        const newComment = new Array(Object.assign(formObj, {'id': res.data.id, 'memberName': name}))
         props.onAddComment(newComment);
         setEnteredComment('');
       })
