@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { classes } from './Like.module.css';
+import { LoginState } from '../../store/loginState';
+import { useRecoilState } from 'recoil';
+
 
 
 export default function Like(props) {
@@ -8,6 +11,7 @@ export default function Like(props) {
 
     const [likeCount, setLikeCount] = useState(props.likeCount);
     const [isLiked, setIsLiked] = useState(props.isLiked);
+    const [loginState, setLoginState] = useRecoilState(LoginState);
 
     const downLike = async () => {
 
@@ -73,11 +77,18 @@ export default function Like(props) {
     }
 
     const handleLikeChange = () => {
+
+
+      if(loginState) {
         if(isLiked) {
             downLike()
         } else {
             upLike()
         }
+      } else {
+        alert("해당 기능은 로그인 이후에 가능합니다.")
+      }
+    
     }
 
 
