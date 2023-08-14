@@ -43,7 +43,7 @@ export default function SubReview(props) {
 
     const response = await axios({
       method: "get",
-      url: `http://localhost:8080/auth/board/review/${id}`,
+      url: `http://localhost:8080/board/review/${id}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
