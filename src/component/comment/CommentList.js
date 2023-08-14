@@ -50,11 +50,14 @@ export default function CommentList(props) {
           {comment.memberName}
           <span className={`${classes.tooltiptext} ${classes.tooltip_bottom}`}>{comment.memberEmail}</span>
         </div>
-        <div className={classes.action}>
-          <span onClick={() => handleModify(comment.id)}>수정</span>
-          <span className={classes.separator}>|</span>
-          <span onClick={() => handleShow(comment.id)}>삭제</span>
-        </div>
+        {
+          comment.myComment &&
+          <div className={classes.action}>
+            <span onClick={() => handleModify(comment.id)}>수정</span>
+            <span className={classes.separator}>|</span>
+            <span onClick={() => handleShow(comment.id)}>삭제</span>
+          </div>
+        }
       </div>
       {isModified === comment.id ? <CommentModify commentId={comment.id} boardId={props.boardId} content={comment.content} setIsModified={setIsModified} onUpdateComment={props.onUpdateComment}/> : <div>{comment.content}</div>}
       <Reply />

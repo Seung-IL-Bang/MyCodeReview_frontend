@@ -45,7 +45,7 @@ export default function CommentWrite(props) {
       }
     })
       .then(res => {
-        const newComment = new Array(Object.assign(formObj, {'id': res.data.id, 'memberName': name}))
+        const newComment = new Array(Object.assign(formObj, {'id': res.data.id, 'memberName': name, 'myComment': true}))
         props.onAddComment(newComment);
         setEnteredComment('');
       })

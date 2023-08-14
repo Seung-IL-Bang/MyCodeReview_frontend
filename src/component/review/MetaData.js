@@ -24,14 +24,14 @@ export default function MetaData(props) {
   const handleDeleteBoard = () => {
     deleteById(props.boardId).then((res) => {
       navigate("/myhome");
-    });
+    }).catch(e => {alert(e.response.data.message)})
   };
 
   const handleDeleteSubReview = () => {
     deleteBySubReviewId(props.subReviewId)
       .then((res) => {
         window.location = `/review/${props.boardId}`
-      })
+      }).catch(e => {alert(e.response.data.message)})
   }
 
   const handleMoveToModifyPage = () => {
@@ -105,14 +105,18 @@ export default function MetaData(props) {
               <img onClick={handleGoToSource} src="/output.png" alt="output" />
               <span className={`${classes.tooltiptext} ${classes.tooltip_bottom}`}>해당 문제 페이지로 이동</span>  
             </div>
-            <span className={classes.separator}>|</span>
-            <span onClick={props.isSub ? handleMoveToSubReviewModifyPage : handleMoveToModifyPage} className={classes.link}>
-              수정
-            </span>
-            <span className={classes.separator}>|</span>
-            <span onClick={props.isSub ? handleDeleteSubReview : handleDeleteBoard} className={classes.link}>
-              삭제
-            </span>
+            { props.data.myBoard &&
+              <div>
+                <span className={classes.separator}>|</span>
+                <span onClick={props.isSub ? handleMoveToSubReviewModifyPage : handleMoveToModifyPage} className={classes.link}>
+                  수정
+                </span>
+                <span className={classes.separator}>|</span>
+                <span onClick={props.isSub ? handleDeleteSubReview : handleDeleteBoard} className={classes.link}>
+                  삭제
+                </span>
+              </div>
+            }
           </div>
         </Col>
       </Row>

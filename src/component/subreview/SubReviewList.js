@@ -43,9 +43,12 @@ export default function SubReviewList(props) {
   return (
     <div>
       <div>
-        <Button variant="primary" onClick={() => handleAddReview(props.boardId)}>
-          Add Review
-        </Button>
+        {
+          props.data.myBoard &&
+          <Button variant="primary" onClick={() => handleAddReview(props.boardId)}>
+            Add Review
+          </Button>
+        }
         <div
           onClick={handleGetMainBoard}
           className={classes.subtitle}

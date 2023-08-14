@@ -36,7 +36,8 @@ export default function CommentModify(props) {
       'content': enteredComment,
       'boardId': props.boardId,
       'memberEmail': email,
-      'memberName': name
+      'memberName': name,
+      'myComment': true
     }
 
 
