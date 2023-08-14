@@ -14,6 +14,7 @@ export default function Review(props) {
       getBoardById(id)
         .then(res => {
           setData(res)
+          console.log(res)
           setIsLoading(false)
         })
   }, [])
@@ -22,12 +23,22 @@ export default function Review(props) {
     
     const accessToken = localStorage.getItem('accessToken')
 
-    const response = await axios({
-      method: 'get',
-      url: `http://localhost:8080/board/${id}`,
-    })
-    
-    return response.data
+    if (accessToken) {
+      const response = await axios({
+        method: 'get',
+        url: `http://localhost:8080/board/${id}`,
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      })
+      return response.data
+    } else {
+      const response = await axios({
+        method: 'get',
+        url: `http://localhost:8080/board/${id}`
+      })
+      return response.data
+    }
   }
 
   return (
