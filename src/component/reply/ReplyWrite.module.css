@@ -1,0 +1,25 @@
+.container {
+  margin-top: 2rem;
+}
+
+.writeBtn {
+  -webkit-box-align: center;
+  align-items: center;
+  color: #1a9ebe;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+.rotate {
+  transform: rotate(180deg)
+}
