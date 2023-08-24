@@ -10,7 +10,7 @@
   font-size: 1rem;
   color: var(--text1);
   line-height: 1.75;
-  background: var(--bg-element1);
+  background: #FFFFFF;
 }
 
 .button_wrapper {

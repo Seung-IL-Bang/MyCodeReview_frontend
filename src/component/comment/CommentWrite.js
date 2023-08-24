@@ -25,7 +25,13 @@ export default function CommentWrite(props) {
 
     const userData = localStorage.getItem('userinfo');
     const userInfo = JSON.parse(userData);
-    const email = userInfo.email;
+
+    if (userInfo === null) {
+      alert("댓글을 작성하려면 로그인해야 합니다.")
+      return;
+    }
+
+    const email = userInfo.email
     const name = userInfo.name;
 
     const formObj = {
