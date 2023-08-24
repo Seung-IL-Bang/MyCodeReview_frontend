@@ -17,15 +17,18 @@ import { useEffect, useState } from 'react';
 export default function MarkdownViewer(props) {  
 
   const [comments, setComments] = useState(props.data.commentList);
+  const [commentsCount, setCommentsCount] = useState(props.data.commentsCount);
 
   const addComment = (newComment) => {
-    const newComments = newComment.concat(comments)
+    const newComments = comments.concat(newComment)
+    setCommentsCount((prev) => prev + 1);
     setComments(newComments);
   }
 
   const removeComment = (commentId) => {
     const index = comments.findIndex(comment => comment.id === commentId);
     comments.splice(index, 1);
+    setCommentsCount((prev) => prev - 1);
     setComments(comments);
   }
 
@@ -55,7 +58,7 @@ export default function MarkdownViewer(props) {
             </Viewer>
             <hr />
             <br />
-            <Comment boardId={props.id} comments={comments} onAddComment={addComment} onRemoveComment={removeComment} onUpdateComment={updateComment}></Comment>
+            <Comment boardId={props.id} commentsCount={commentsCount} comments={comments} onAddComment={addComment} onRemoveComment={removeComment} onUpdateComment={updateComment}></Comment>
           </Col>
         </Row>
       </Container>
