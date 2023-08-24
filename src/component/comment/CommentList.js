@@ -60,7 +60,7 @@ export default function CommentList(props) {
         }
       </div>
       {isModified === comment.id ? <CommentModify commentId={comment.id} boardId={props.boardId} content={comment.content} setIsModified={setIsModified} onUpdateComment={props.onUpdateComment}/> : <div>{comment.content}</div>}
-      <Reply />
+      <Reply replies={comment.replies} repliesCount={comment.repliesCount} boardId={props.boardId} commentId={comment.id}/>
     </div>
   ))
 
