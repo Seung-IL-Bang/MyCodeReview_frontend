@@ -1,0 +1,80 @@
+.comment_wrapper {
+  border-top: 1px solid #F1F3F5;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.metadata {
+  margin-bottom: 1.5rem;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.writer {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #212529;
+}
+
+.separator {
+  color: gray;
+  margin: 0 8px;
+}
+
+.action {
+  font-family: 'Trendy Font', sans-serif;
+  color: gray;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.action span:hover {
+  text-decoration: underline;
+  color: rgb(105, 103, 103);
+}
+
+.tooltip {
+  position: relative;
+  display: block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: auto;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  border-style: solid;
+  border-width: 5px;
+}
+
+.tooltip .tooltip_bottom {
+  width: auto;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+
+.tooltip .tooltip_bottom::after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -27px;
+  border-color: transparent transparent #007bff transparent;
+}

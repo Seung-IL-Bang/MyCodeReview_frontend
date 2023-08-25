@@ -1,0 +1,134 @@
+.container {
+  margin-top: 2rem;
+  
+}
+
+.reply_wrapper {
+  border-bottom: 1px solid #F1F3F5;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.list_wrapper {
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.016);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-top: 1.3125rem;
+}
+
+.metadata {
+  margin-bottom: 1.5rem;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.writer {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #212529;
+}
+
+.separator {
+  color: gray;
+  margin: 0 8px;
+}
+
+.action {
+  font-family: 'Trendy Font', sans-serif;
+  color: gray;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.action span:hover {
+  text-decoration: underline;
+  color: rgb(105, 103, 103);
+}
+
+.tooltip {
+  position: relative;
+  display: block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: auto;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  border-style: solid;
+  border-width: 5px;
+}
+
+.tooltip .tooltip_bottom {
+  width: auto;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+
+.tooltip .tooltip_bottom::after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -27px;
+  border-color: transparent transparent #007bff transparent;
+}
+
+
+.listBtn {
+  -webkit-box-align: center;
+  align-items: center;
+  color: #1a9ebe;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.writeBtn {
+  cursor: pointer;
+  height: 2.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #1a9ebe;
+  display: flex;
+  outline: none;
+  color: #1a9ebe;
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  font-weight: 600;
+  background: #FFFFFF;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+.rotate {
+  transform: rotate(180deg)
+}

@@ -41,15 +41,22 @@ export default function SubReview(props) {
   const getSubReviewById = async (id) => {
     const accessToken = localStorage.getItem("accessToken");
 
-    const response = await axios({
-      method: "get",
-      url: `http://localhost:8080/auth/board/review/${id}`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    return response.data;
+    if (accessToken) {
+      const response = await axios({
+        method: 'get',
+        url: `http://localhost:8080/board/review/${id}`,
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      })
+      return response.data
+    } else {
+      const response = await axios({
+        method: 'get',
+        url: `http://localhost:8080/board/review/${id}`
+      })
+      return response.data
+    }
   };
 
   return (
