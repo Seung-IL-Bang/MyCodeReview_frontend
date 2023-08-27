@@ -1,0 +1,51 @@
+@startuml
+skinparam groupInheritance 6
+
+object MainHome
+object Home
+object Favorites
+
+object Header
+object Content
+object Footer
+
+object Menu
+object Write
+
+object Option
+object BoardList
+object TagList
+object PageList
+
+object TitleForm
+object Link
+object Difficulty
+object Tag
+object MarkdownInput
+object MarkdownSubmit
+
+
+MainHome *-- Header
+MainHome *-- Content
+MainHome *-- Footer
+
+Header *-- Menu
+Header *-- Write
+
+Content *-- Option
+Content *-- TagList
+Content *-- BoardList
+
+Footer *-- PageList
+
+Write <|-- TitleForm
+Write <|-- Link
+Write <|-- Difficulty
+Write <|-- Tag
+Write <|-- MarkdownInput
+Write <|-- MarkdownSubmit
+
+
+
+
+@enduml
