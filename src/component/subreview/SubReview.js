@@ -43,7 +43,7 @@ export default function SubReview(props) {
       try {
         await axios({
           method: 'get',
-          url: `http://localhost:8080/board/review/${id}`,
+          url: process.env.REACT_APP_SERVER_URL + `/board/review/${id}`,
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
@@ -77,7 +77,7 @@ export default function SubReview(props) {
     } else {
       await axios({
         method: 'get',
-        url: `http://localhost:8080/board/review/${id}`
+        url: process.env.REACT_APP_SERVER_URL + `/board/review/${id}`
       }).then((res) => {
         setData(res.data);
         setBoardId(res.data.boardId);

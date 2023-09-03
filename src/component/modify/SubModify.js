@@ -56,7 +56,7 @@ export default function SubModify(props) {
       try {
         await axios({
           method: 'put',
-          url: `http://localhost:8080/auth/board/review/${id}`,
+          url: process.env.REACT_APP_SERVER_URL + `/auth/board/review/${id}`,
           data: JSON.stringify(formObj),
           headers: {
             "Content-Type": "application/json",

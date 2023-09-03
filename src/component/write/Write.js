@@ -64,7 +64,7 @@ export default function Write(props) {
     try {
       await axios({
           method: 'post',
-          url: 'http://localhost:8080/auth/board',
+          url: process.env.REACT_APP_SERVER_URL + '/auth/board',
           data: JSON.stringify(formObj),
           headers: {
               'Content-Type': 'application/json',

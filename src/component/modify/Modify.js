@@ -66,7 +66,7 @@ export default function Modify(props) {
     try {
       await axios({
         method: "put",
-        url: `http://localhost:8080/auth/board/${id}`,
+        url: process.env.REACT_APP_SERVER_URL + `/auth/board/${id}`,
         data: JSON.stringify(formObj),
         headers: {
           "Content-Type": "application/json",

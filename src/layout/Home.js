@@ -24,7 +24,7 @@ export default function Home(props) {
 
       const response = await axios({
         method: "get",
-        url: `http://localhost:8080/auth/board/v2/list${queryParam}`,
+        url: process.env.REACT_APP_SERVER_URL + `/auth/board/v2/list${queryParam}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
