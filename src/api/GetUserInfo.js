@@ -16,7 +16,7 @@ export default function GetUserInfo(props) {
 
   const getUserInfo = async () => {
 
-    const res = await axios.get("http://localhost:8080/auth/userinfo", {
+    const res = await axios.get(process.env.REACT_APP_SERVER_URL + "/auth/userinfo", {
       headers: authHeader,
     });
 

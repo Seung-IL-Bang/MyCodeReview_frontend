@@ -48,7 +48,7 @@ export default function CommentModify(props) {
 
       await axios({
         method: 'put',
-        url: 'http://localhost:8080/auth/comment',
+        url: process.env.REACT_APP_SERVER_URL + '/auth/comment',
         data: JSON.stringify(formObj),
         headers: {
           'Content-Type': 'application/json',

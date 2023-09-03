@@ -69,7 +69,7 @@ export default function MetaData(props) {
     try {
       const response = await axios({
         method: "delete",
-        url: `http://localhost:8080/auth/board/${id}`,
+        url: process.env.REACT_APP_SERVER_URL + `/auth/board/${id}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -104,7 +104,7 @@ export default function MetaData(props) {
     try {
       const response = await axios({
         method: 'delete',
-        url: `http://localhost:8080/auth/board/review/${subReviewId}`,
+        url: process.env.REACT_APP_SERVER_URL + `/auth/board/review/${subReviewId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }

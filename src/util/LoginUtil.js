@@ -7,7 +7,7 @@ export async function callRefresh() {
 
   const tokens = {accessToken, refreshToken};
 
-  const res = await axios.post("http://localhost:8080/refreshPath", tokens);
+  const res = await axios.post(process.env.REACT_APP_SERVER_URL + "/refreshPath", tokens);
 
   console.log("refresh Res: " + res)
 

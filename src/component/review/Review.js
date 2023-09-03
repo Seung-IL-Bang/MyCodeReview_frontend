@@ -26,7 +26,7 @@ export default function Review(props) {
       try {
         await axios({
           method: 'get',
-          url: `http://localhost:8080/board/${id}`,
+          url: process.env.REACT_APP_SERVER_URL + `/board/${id}`,
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
@@ -56,7 +56,7 @@ export default function Review(props) {
     } else {
       await axios({
         method: 'get',
-        url: `http://localhost:8080/board/${id}`
+        url: process.env.REACT_APP_SERVER_URL + `/board/${id}`
       }).then(res => {
         setData(res.data)
         setIsLoading(false)

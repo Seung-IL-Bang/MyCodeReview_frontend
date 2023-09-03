@@ -32,7 +32,7 @@ export default function CommentList(props) {
       
       await axios({
         method: 'delete',
-        url: `http://localhost:8080/auth/comment/${commentId}`,
+        url: process.env.REACT_APP_SERVER_URL + `/auth/comment/${commentId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }

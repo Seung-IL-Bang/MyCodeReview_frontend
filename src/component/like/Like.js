@@ -31,7 +31,7 @@ export default function Like(props) {
         try {
           await axios({
               method: 'delete',
-              url: 'http://localhost:8080/auth/like',
+              url: process.env.REACT_APP_SERVER_URL + '/auth/like',
               data: JSON.stringify(formObj),
               headers: {
                   'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export default function Like(props) {
         try {
           await axios({
               method: 'post',
-              url: 'http://localhost:8080/auth/like',
+              url: process.env.REACT_APP_SERVER_URL + '/auth/like',
               data: JSON.stringify(formObj),
               headers: {
                   'Content-Type': 'application/json',

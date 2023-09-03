@@ -46,7 +46,7 @@ export default function ReplyWriteEditor(props) {
     try {
       await axios({
         method: 'post',
-        url: 'http://localhost:8080/auth/reply',
+        url: process.env.REACT_APP_SERVER_URL + '/auth/reply',
         data: JSON.stringify(formObj),
         headers: {
           'Content-Type': 'application/json',

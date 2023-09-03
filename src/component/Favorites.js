@@ -25,7 +25,7 @@ export default function Favorites(props) {
       
       const response = await axios({
         method: "get",
-        url: `http://localhost:8080/auth/board/liked/list${queryParam}`,
+        url: process.env.REACT_APP_SERVER_URL + `/auth/board/liked/list${queryParam}`,
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }

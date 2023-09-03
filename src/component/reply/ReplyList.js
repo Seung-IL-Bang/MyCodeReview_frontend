@@ -47,7 +47,7 @@ export default function ReplyList(props) {
     try {
       await axios({
         method: 'delete',
-        url: `http://localhost:8080/auth/reply/${replyId}`,
+        url: process.env.REACT_APP_SERVER_URL + `/auth/reply/${replyId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }

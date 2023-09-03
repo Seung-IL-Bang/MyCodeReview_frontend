@@ -19,10 +19,10 @@ function Menu(props) {
   const handleClose = () => setShow(false); 
 
   const googleLogin = () => {
-    window.location = 'http://localhost:8080/oauth2/authorization/google'
+    window.location = process.env.REACT_APP_SERVER_URL + '/oauth2/authorization/google'
   }
   const kakaoLogin = () => {
-    window.location = 'http://localhost:8080/oauth2/authorization/kakao'
+    window.location = process.env.REACT_APP_SERVER_URL + '/oauth2/authorization/kakao'
   }
   
   const logout = () => {

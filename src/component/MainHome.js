@@ -19,7 +19,7 @@ export default function MainHome(props) {
   const getPublicBoardListWithPaging = async (queryParam) => {
     const response = await axios({
       method: "get",
-      url: `http://localhost:8080/board/list${queryParam}`
+      url: process.env.REACT_APP_SERVER_URL + `/board/list${queryParam}`
     })
 
     return response.data;
