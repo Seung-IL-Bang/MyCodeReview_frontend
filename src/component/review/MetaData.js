@@ -12,8 +12,13 @@ import {
 } from "../../reducer/metaDataReducer";
 import SelectedDifficulty from "../write/SelectedDifficulty";
 import { setSubContent, setSubTitle } from "../../reducer/subReviewReducer";
+import { callRefresh, clearLocalStorage } from "../../util/LoginUtil";
+import { useRecoilState } from "recoil";
+import { LoginState } from "../../store/loginState";
 
 export default function MetaData(props) {
+
+  const [loginState, setLoginState] = useRecoilState(LoginState);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,14 +29,14 @@ export default function MetaData(props) {
   const handleDeleteBoard = () => {
     deleteById(props.boardId).then((res) => {
       navigate("/myhome");
-    }).catch(e => {alert(e.response.data.message)})
+    })
   };
 
   const handleDeleteSubReview = () => {
     deleteBySubReviewId(props.subReviewId)
       .then((res) => {
         window.location = `/review/${props.boardId}`
-      }).catch(e => {alert(e.response.data.message)})
+      })
   }
 
   const handleMoveToModifyPage = () => {
@@ -61,29 +66,69 @@ export default function MetaData(props) {
   const deleteById = async (id) => {
     const accessToken = localStorage.getItem("accessToken");
 
-    const response = await axios({
-      method: "delete",
-      url: `http://localhost:8080/auth/board/${id}`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    return response.data;
+    try {
+      const response = await axios({
+        method: "delete",
+        url: `http://localhost:8080/auth/board/${id}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+  
+      return response.data;
+    } catch (e) {
+      if(e.response.data.message === 'Expired Token') {
+        try {
+            await callRefresh(); // refreshToken 호출
+            console.log("new tokens...saved..."); // 새로운 토큰 저장 후 다시 원래 기능 호출
+            deleteById(id);
+          } catch (refreshErr) {
+            alert("로그인 유효기간이 지났습니다.");
+            setLoginState(false);
+            clearLocalStorage();
+            window.location = '/'; // TODO: '/login' 으로 리다이렉팅
+          }
+      } else { // Malformed jwt, Bad Signature
+        alert(e.response.data.message)
+        alert("잘못된 요청으로 다시 로그인 해주시길 바랍니다.");
+        setLoginState(false);
+        clearLocalStorage();
+        window.location = '/'; // TODO: '/login' 으로 리다이렉팅
+      }
+    }
   };
 
   const deleteBySubReviewId = async (subReviewId) => {
     const accessToken = localStorage.getItem("accessToken");
-    const refreshToken = localStorage.getItem("refreshToken");
 
-    const response = await axios({
-      method: 'delete',
-      url: `http://localhost:8080/auth/board/review/${subReviewId}`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`
+    try {
+      const response = await axios({
+        method: 'delete',
+        url: `http://localhost:8080/auth/board/review/${subReviewId}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+    } catch (e) {
+      if(e.response.data.message === 'Expired Token') {
+        try {
+            await callRefresh(); // refreshToken 호출
+            console.log("new tokens...saved..."); // 새로운 토큰 저장 후 다시 원래 기능 호출
+            deleteBySubReviewId(subReviewId);
+          } catch (refreshErr) {
+            alert("로그인 유효기간이 지났습니다.");
+            setLoginState(false);
+            clearLocalStorage();
+            window.location = '/'; // TODO: '/login' 으로 리다이렉팅
+          }
+      } else { // Malformed jwt, Bad Signature
+        alert("잘못된 요청으로 다시 로그인 해주시길 바랍니다.");
+        setLoginState(false);
+        clearLocalStorage();
+        window.location = '/'; // TODO: '/login' 으로 리다이렉팅
       }
-    })
-
+    }
+    
   }
 
   return (

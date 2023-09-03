@@ -6,10 +6,13 @@ import axios from 'axios';
 import ReplyModify from "./ReplyModify";
 import ReplyWrite from "./ReplyWrite";
 import ReplyWriteEditor from "./ReplyWriteEditor";
+import { callRefresh, clearLocalStorage } from "../../util/LoginUtil";
+import { useRecoilState } from "recoil";
+import { LoginState } from "../../store/loginState";
 
 export default function ReplyList(props) {
 
-
+  const [loginState, setLoginState] = useRecoilState(LoginState);
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
   const [isModified, setIsModified] = useState(0);
@@ -40,20 +43,39 @@ export default function ReplyList(props) {
   const handleDeleteReply = async (replyId) => {
 
     const accessToken = localStorage.getItem('accessToken')
-    const refreshToken = localStorage.getItem('refreshToken')
     
-    await axios({
-      method: 'delete',
-      url: `http://localhost:8080/auth/reply/${replyId}`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-      })
-        .then(res => {
-          props.onRemoveReply(replyId);
-          handleClose();
+    try {
+      await axios({
+        method: 'delete',
+        url: `http://localhost:8080/auth/reply/${replyId}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
         })
-        .catch(e => alert(e.response.data.message));
+          .then(res => {
+            props.onRemoveReply(replyId);
+            handleClose();
+          })
+    } catch (e) {
+      if(e.response.data.message === 'Expired Token') {
+        try {
+            await callRefresh(); // refreshToken 호출
+            console.log("new tokens...saved..."); // 새로운 토큰 저장 후 다시 원래 기능 호출
+            handleDeleteReply(replyId);
+          } catch (refreshErr) {
+            alert("로그인 유효기간이 지났습니다.");
+            setLoginState(false);
+            clearLocalStorage();
+            window.location = '/'; // TODO: '/login' 으로 리다이렉팅
+          }
+      } else { // Malformed jwt, Bad Signature
+        alert("잘못된 요청으로 다시 로그인 해주시길 바랍니다.");
+        setLoginState(false);
+        clearLocalStorage();
+        window.location = '/'; // TODO: '/login' 으로 리다이렉팅
+      }
+    }
+
   }
 
 
@@ -73,7 +95,7 @@ export default function ReplyList(props) {
         </div>
       }
       </div>
-      {isModified === reply.id ? <ReplyModify boardId={reply.boardId} commentId={reply.commentId} content={reply.content} onUpdateReply={props.onUpdateReply} setIsModified={setIsModified} replyId={reply.id} /> : <div>{reply.content}</div>}
+      {isModified === reply.id ? <ReplyModify boardId={reply.boardId} commentId={props.commentId} content={reply.content} onUpdateReply={props.onUpdateReply} setIsModified={setIsModified} replyId={reply.id} /> : <div>{reply.content}</div>}
     </div>
   ));
 

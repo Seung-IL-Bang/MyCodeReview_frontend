@@ -6,9 +6,13 @@ import axios from 'axios';
 import Tag from './Tag';
 import Link from './Link';
 import Difficulty from './Difficulty';
+import { callRefresh, clearLocalStorage } from '../../util/LoginUtil';
+import { useRecoilState } from 'recoil';
+import { LoginState } from '../../store/loginState';
 
 export default function Write(props) {
 
+  const [loginState, setLoginState] = useRecoilState(LoginState);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const childTitleRef = useRef();
@@ -57,18 +61,37 @@ export default function Write(props) {
       'email' : email
     }
 
+    try {
+      await axios({
+          method: 'post',
+          url: 'http://localhost:8080/auth/board',
+          data: JSON.stringify(formObj),
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization' : `Bearer ${accessToken}`
+          }
+        })
+        .then(response => {setIsSubmitted(true)})
+    } catch (e) {
+      if(e.response.data.message === 'Expired Token') {
+        try {
+            await callRefresh(); // refreshToken 호출
+            console.log("new tokens...saved..."); // 새로운 토큰 저장 후 다시 원래 기능 호출
+            uploadToServer(title, content, tagList, link, difficulty);
+          } catch (refreshErr) {
+            alert("로그인 유효기간이 지났습니다.");
+            setLoginState(false);
+            clearLocalStorage();
+            window.location = '/'; // TODO: '/login' 으로 리다이렉팅
+          }
+      } else { // Malformed jwt, Bad Signature
+        alert("잘못된 요청으로 다시 로그인 해주시길 바랍니다.");
+        setLoginState(false);
+        clearLocalStorage();
+        window.location = '/'; // TODO: '/login' 으로 리다이렉팅
+      }
+    }
 
-    await axios({
-        method: 'post',
-        url: 'http://localhost:8080/auth/board',
-        data: JSON.stringify(formObj),
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization' : `Bearer ${accessToken}`
-        }
-      })
-      .then(response => {setIsSubmitted(true)})
-      .catch(e => {alert(e.response.data.message)});
 }
 
   if(isSubmitted) {
