@@ -9,9 +9,13 @@ export default function Reply(props) {
   const [replies, setReplies] = useState(props.replies);
 
   const addReply = (newReply) => {
-    const newReplies = replies.concat(newReply);
+    if(!replies) { // replies 가 0개인 경우 -> undefiend
+      setReplies(Array(newReply))
+    } else {
+      const newReplies = replies.concat(newReply);
+      setReplies(newReplies);
+    }
     setRepliesCount((prev) => prev + 1);
-    setReplies(newReplies);
   }
 
   const removeReply = (replyId) => {
@@ -31,7 +35,7 @@ export default function Reply(props) {
     <div>
       {repliesCount >= 1 
       ? <ReplyList replies={replies} repliesCount={repliesCount} onUpdateReply={updateReply} onRemoveReply={removeReply} onAddReply={addReply} boardId={props.boardId} commentId={props.commentId}/> 
-      : <ReplyWrite onAddReply={addReply} commentId={props.commentId}/> }
+      : <ReplyWrite onAddReply={addReply} commentId={props.commentId} /> }
     </div>
   );
 }
