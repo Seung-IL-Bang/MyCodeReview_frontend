@@ -44,13 +44,16 @@ export default function Review(props) {
               alert("로그인 유효기간이 지났습니다.");
               setLoginState(false);
               clearLocalStorage();
-              window.location = '/'; // TODO: '/login' 으로 리다이렉팅
+              window.location = '/'; 
             }
-        } else { // Malformed jwt, Bad Signature
+        } else if (e.response.data.message === 'Malformed Token' || e.response.data.message === 'BadSignatured Token') { // Malformed jwt, Bad Signature
           alert("잘못된 요청으로 다시 로그인 해주시길 바랍니다.");
           setLoginState(false);
           clearLocalStorage();
-          window.location = '/'; // TODO: '/login' 으로 리다이렉팅
+          window.location = '/'; 
+        } else {
+          alert(e.response.data.message)
+          window.location = '/'; 
         }
       }
     } else {
