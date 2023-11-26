@@ -1,9 +1,14 @@
 # MyCodeReview_frontend
 
+<img width="1328" alt="스크린샷 2023-11-26 오후 9 54 45" src="https://github.com/Seung-IL-Bang/MyCodeReview_frontend/assets/87510898/4a27af47-55e4-441b-b83a-f00cabf981ea">
+
+
 ## 프로젝트 소개
 이 프로젝트는 코드 리뷰 플랫폼의 프론트엔드 부분을 담당하고 있으며, React와 Redux를 사용하여 구현되었습니다. 본 프로젝트를 통해 백엔드 개발자로서 프론트엔드 개발 능력을 향상시키고, React에 대한 이해도를 높일 수 있었습니다.
 
-[백엔드 프로젝트 보러가기](https://github.com/Seung-IL-Bang/MyCodeReview_backend)
+📎 배포 링크: https://my-code-review-frontend.vercel.app/
+
+[🚀 백엔드 프로젝트 보러가기](https://github.com/Seung-IL-Bang/MyCodeReview_backend)
 
 <br/>
 
