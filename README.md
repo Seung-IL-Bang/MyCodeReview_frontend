@@ -1,5 +1,7 @@
 # MyCodeReview_frontend
 
+[백엔드 프로젝트](https://github.com/Seung-IL-Bang/MyCodeReview_backend)
+
 ## 프로젝트 소개
 이 프로젝트는 코드 리뷰 플랫폼의 프론트엔드 부분을 담당하고 있으며, React와 Redux를 사용하여 구현되었습니다. 본 프로젝트를 통해 신입 백엔드 개발자로서 프론트엔드 개발 능력을 향상시키고, React에 대한 이해도를 높일 수 있었습니다.
 
